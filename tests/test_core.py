@@ -1,7 +1,11 @@
 from __future__ import annotations
 
+import copy
 import json
+import os
 import random
+import subprocess
+import sys
 from concurrent.futures import ThreadPoolExecutor
 
 import pytest
@@ -169,3 +173,26 @@ def test_server_redaction_at_rest(store):
         ]
     assert key not in raw and "unregistered synthetic value" not in raw
     json.loads(raw)
+
+
+def test_process_death_rolls_back_uncommitted_event(store):
+    rid = store.create("actual process death")
+    code = """import os
+from stepwise.store import configured
+store=configured()
+with store.connection() as conn:
+    store.insert(conn, os.environ['RID'], 0,
+        {'kind':'tool','name':'crash','input':{},'output':42,'error':None})
+    os._exit(37)
+"""
+    child = subprocess.run([sys.executable, "-c", code], env={**os.environ, "RID": rid})
+    assert child.returncode == 37
+    assert store.read(rid)["events"] == []
+
+
+def test_replay_rejects_corrupt_continuation_input(store):
+    original = complete(store, store.create("corrupt tape", "demo"))
+    altered = copy.deepcopy(original)
+    altered["events"][3]["input"] = {"previous": {"amount_usd": 7}}
+    with pytest.raises(Divergence, match="mismatch"):
+        replay(altered)

@@ -1,0 +1,34 @@
+name: Stepwise checks
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:17-bookworm
+        env:
+          POSTGRES_PASSWORD: synthetic-ci-password
+          POSTGRES_DB: stepwise
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd 'pg_isready -U postgres -d stepwise'
+          --health-interval 2s --health-timeout 3s --health-retries 30
+    env:
+      DATABASE_URL: postgresql://postgres:synthetic-ci-password@127.0.0.1:5432/stepwise
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: make setup build lint test
+      - run: .venv/bin/pip-audit --skip-editable
+      - run: npm --prefix apps/web audit --audit-level=high
+      - run: docker build -t stepwise:test .
+      - run: .venv/bin/python scripts/container_smoke.py
+        env:
+          POSTGRES_CONTAINER: ${{ job.services.postgres.id }}

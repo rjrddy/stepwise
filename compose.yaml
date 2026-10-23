@@ -1,0 +1,23 @@
+services:
+  postgres:
+    image: postgres:17-bookworm
+    environment:
+      POSTGRES_PASSWORD: synthetic-local-db-password
+      POSTGRES_DB: stepwise
+    healthcheck:
+      test: [CMD-SHELL, 'pg_isready -U postgres -d stepwise']
+      interval: 2s
+      timeout: 3s
+      retries: 30
+    volumes: [traces:/var/lib/postgresql/data]
+  debugger:
+    build: .
+    environment:
+      DATABASE_URL: postgresql://postgres:synthetic-local-db-password@postgres:5432/stepwise
+      STEPWISE_TOKEN: ${STEPWISE_TOKEN:-synthetic-local-console-key-0001}
+    ports: ['127.0.0.1:8091:8091']
+    depends_on:
+      postgres:
+        condition: service_healthy
+volumes:
+  traces:

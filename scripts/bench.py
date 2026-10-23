@@ -8,6 +8,7 @@ import statistics
 import subprocess
 import threading
 import time
+from functools import partial
 from pathlib import Path
 
 from stepwise.core import Divergence, Tape, canonical
@@ -75,10 +76,10 @@ def main() -> None:
             fn = lambda p: {"answer": p["count"] * 14}  # noqa: E731
             trials.append(
                 {
-                    "disabled": sample(lambda: fn(payload), 300),
-                    "memory": sample(lambda: memory.call("tool", "lookup", payload, fn), 300),
+                    "disabled": sample(partial(fn, payload), 300),
+                    "memory": sample(partial(memory.call, "tool", "lookup", payload, fn), 300),
                     "http_postgres": sample(
-                        lambda: persisted.call("tool", "lookup", payload, fn), 300
+                        partial(persisted.call, "tool", "lookup", payload, fn), 300
                     ),
                 }
             )
@@ -91,17 +92,17 @@ def main() -> None:
         worker.join()
     # Identical redacted event corpus. Compare a SQL predicate to raw JSONL parsing.
     # No pre-computed fault label, no human timings, no claims about diagnosis skill.
+    corpus_id = store.create("diagnostic corpus")
     corpus = []
     event = original["events"][2]
     with store.connection() as conn:
-        conn.execute("DELETE FROM events WHERE run_id=%s", (rid,))
         for index in range(1000):
             bad = index == 971
             record = {
                 **event,
                 "output": {"amount_usd": 4200 if bad else 42, "divisor": 1 if bad else 100},
             }
-            store.insert(conn, rid, index, record)
+            store.insert(conn, corpus_id, index, record)
             corpus.append({"seq": index, **record})
     rawfile = OUT / "diagnosis-corpus.jsonl"
     rawfile.write_text("".join(canonical(row) + "\n" for row in corpus))
@@ -120,7 +121,7 @@ def main() -> None:
                 """SELECT seq FROM events WHERE run_id=%s AND
               (body->'output'->>'amount_usd')::numeric <>
               (body->'input'->'previous'->>'price_cents')::numeric/100 ORDER BY seq LIMIT 1""",
-                (rid,),
+                (corpus_id,),
             ).fetchone()
             assert row["seq"] == 971
             return row["seq"]
@@ -132,11 +133,6 @@ def main() -> None:
         "raw_jsonl": sample(logs, 50),
         "postgres_query": sample(query, 50),
     }
-    # Restore the original tape after using its run as a bounded benchmark corpus.
-    with store.connection() as conn:
-        conn.execute("DELETE FROM events WHERE run_id=%s", (rid,))
-        for index, item in enumerate(original["events"]):
-            store.insert(conn, rid, index, item)
     result = {
         "machine": {
             "platform": platform.platform(),

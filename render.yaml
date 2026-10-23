@@ -1,0 +1,16 @@
+# Prepared only. No account or deployment created. Supply an existing Postgres URL.
+services:
+  - type: web
+    name: stepwise-debugger
+    runtime: docker
+    plan: free
+    healthCheckPath: /api/health
+    envVars:
+      - key: DATABASE_URL
+        sync: false
+      - key: STEPWISE_TOKEN
+        generateValue: true
+      - key: HOST
+        value: 0.0.0.0
+      - key: PORT
+        value: '8091'

@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import copy
 import random
+import uuid
 from typing import Any
 
 from stepwise.core import Tape, canonical, digest, redact
@@ -93,8 +94,12 @@ def fork(store: Store, rid: str, seq: int, output: Any) -> str:
         or not 0 <= output["amount_usd"] <= 10**8
     ):
         raise ValueError("quote output requires bounded amount_usd")
-    child = store.create("Edited · " + original["label"][:100], "demo", parent=rid)
+    child = str(uuid.uuid4())
     with store.connection() as conn:
+        conn.execute(
+            "INSERT INTO runs(id,label,mode,parent) VALUES(%s,%s,%s,%s)",
+            (child, "Edited · " + original["label"][:100], "demo", rid),
+        )
         events = copy.deepcopy(original["events"][: seq + 1])
         events[-1]["output"] = redact(output, store.secrets)
         events[-1]["error"] = None
@@ -107,12 +112,12 @@ def fork(store: Store, rid: str, seq: int, output: Any) -> str:
 def replay(run: dict) -> dict:
     source = run["events"]
     tape = Tape(replay=source)
-    for event in source:
+    for seq, event in enumerate(source):
         try:
             tape.call(
                 event["kind"],
                 event["name"],
-                event["input"],
+                input_at(seq, tape.events) if run.get("mode") == "demo" else event["input"],
                 lambda _: (_ for _ in ()).throw(AssertionError("provider invoked")),
             )
         except RuntimeError:
