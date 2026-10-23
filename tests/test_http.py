@@ -33,12 +33,15 @@ def test_python_and_node_sdk_real_http_postgres(server):
     rid, tape = client.record("Python SDK")
     tape.call("model", "plan", {"q": "SYNTHETIC-NEVER-PERSIST-KEY"}, lambda _: {"x": 2})
     replay = client.replay(rid)
-    assert replay.call("model", "plan", {"q": "SYNTHETIC-NEVER-PERSIST-KEY"}, lambda _: pytest.fail()) == {"x": 2}
+    assert replay.call(
+        "model", "plan", {"q": "SYNTHETIC-NEVER-PERSIST-KEY"}, lambda _: pytest.fail()
+    ) == {"x": 2}
     replay.finish()
     assert tape.events == replay.events
     env = {**os.environ, "STEPWISE_BASE": base, "STEPWISE_TOKEN": server.token}
-    result = subprocess.run(["node", "tests/node_test.mjs"], env=env, capture_output=True, text=True,
-                            check=True)
+    result = subprocess.run(
+        ["node", "tests/node_test.mjs"], env=env, capture_output=True, text=True, check=True
+    )
     assert json.loads(result.stdout)["node_sdk"] == "pass"
     with pytest.raises(urllib.error.HTTPError) as error:
         Client(base).request("/api/runs")
@@ -48,13 +51,14 @@ def test_python_and_node_sdk_real_http_postgres(server):
 def test_http_validation_origin_and_database_failure(server):
     base = f"http://127.0.0.1:{server.server_port}"
     headers = {"Authorization": "Bearer " + server.token, "Content-Type": "application/json"}
-    for body, status in [(b'{"x":NaN}', 400), (b'[]', 400), (b'x'*65537, 413)]:
+    for body, status in [(b'{"x":NaN}', 400), (b"[]", 400), (b"x" * 65537, 413)]:
         request = urllib.request.Request(base + "/api/runs", data=body, headers=headers)
         with pytest.raises(urllib.error.HTTPError) as error:
             urllib.request.urlopen(request)
         assert error.value.code == status
-    request = urllib.request.Request(base + "/api/runs", data=b'{}',
-                                     headers={**headers, "Origin": "https://other.invalid"})
+    request = urllib.request.Request(
+        base + "/api/runs", data=b"{}", headers={**headers, "Origin": "https://other.invalid"}
+    )
     with pytest.raises(urllib.error.HTTPError) as error:
         urllib.request.urlopen(request)
     assert error.value.code == 403

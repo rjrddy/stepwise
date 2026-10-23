@@ -29,12 +29,17 @@ def test_capture_replay_property():
     rng = random.Random(7301)
     for _ in range(200):
         tape = Tape()
-        values = [{"x": rng.randrange(10000), "label": "synthetic"} for _ in range(rng.randrange(1, 20))]
+        values = [
+            {"x": rng.randrange(10000), "label": "synthetic"} for _ in range(rng.randrange(1, 20))
+        ]
         for item in values:
             tape.call("tool", "lookup", item, lambda p: {"v": p["x"] + rng.random()})
         restored = Tape(replay=tape.events)
         for item, event in zip(values, tape.events, strict=True):
-            assert restored.call("tool", "lookup", item, lambda _: pytest.fail("side effect")) == event["output"]
+            assert (
+                restored.call("tool", "lookup", item, lambda _: pytest.fail("side effect"))
+                == event["output"]
+            )
         restored.finish()
         assert canonical(tape.events) == canonical(restored.events)
         assert digest(tape.events) == digest(restored.events)
@@ -59,12 +64,17 @@ def test_redaction_failure_and_sink():
     key = "SYNTHETIC-NEVER-PERSIST-KEY"
     tape = Tape(secrets=(key,))
     with pytest.raises(ValueError):
-        tape.call("tool", "failure", {"nested": [{"api_key": key}], "q": key},
-                  lambda _: (_ for _ in ()).throw(ValueError("Bearer " + key)))
+        tape.call(
+            "tool",
+            "failure",
+            {"nested": [{"api_key": key}], "q": key},
+            lambda _: (_ for _ in ()).throw(ValueError("Bearer " + key)),
+        )
     assert key not in canonical(tape.events)
     with pytest.raises(RecordedError):
         Tape(replay=tape.events, secrets=(key,)).call(
-            "tool", "failure", {"nested": [{"api_key": key}], "q": key}, lambda _: None)
+            "tool", "failure", {"nested": [{"api_key": key}], "q": key}, lambda _: None
+        )
     broken = Tape(lambda _: (_ for _ in ()).throw(ConnectionError("store down")))
     with pytest.raises(ConnectionError):
         broken.call("tool", "ok", {}, lambda _: 1)
@@ -81,7 +91,9 @@ def test_json_validation():
     with pytest.raises(ValueError):
         canonical(nested)
     assert redact({"Authorization": "anything", "text": "Bearer abc.def"}) == {
-        "Authorization": "[REDACTED]", "text": "Bearer [REDACTED]"}
+        "Authorization": "[REDACTED]",
+        "text": "Bearer [REDACTED]",
+    }
 
 
 def test_breakpoint_fork_replay_and_restart(store):
@@ -127,12 +139,14 @@ def test_append_concurrency_idempotency_and_transaction_rollback(store):
 
 def test_continuation_concurrent_single_winner(store):
     rid = store.create("race", "demo")
+
     def attempt(_):
         try:
             advance(store, rid, 0)
             return True
         except Conflict:
             return False
+
     with ThreadPoolExecutor(max_workers=8) as pool:
         assert sum(pool.map(attempt, range(16))) == 1
     assert len(store.read(rid)["events"]) == 1
@@ -141,10 +155,17 @@ def test_continuation_concurrent_single_winner(store):
 def test_server_redaction_at_rest(store):
     rid = store.create("server-side redaction")
     key = store.secrets[0]
-    event = {"kind": "model", "name": "ask", "input": {"text": key},
-             "output": {"password": "unregistered synthetic value", "text": key}, "error": None}
+    event = {
+        "kind": "model",
+        "name": "ask",
+        "input": {"text": key},
+        "output": {"password": "unregistered synthetic value", "text": key},
+        "error": None,
+    }
     store.append(rid, 0, event)
     with store.connection() as conn:
-        raw = conn.execute("SELECT body::text FROM events WHERE run_id=%s", (rid,)).fetchone()["body"]
+        raw = conn.execute("SELECT body::text FROM events WHERE run_id=%s", (rid,)).fetchone()[
+            "body"
+        ]
     assert key not in raw and "unregistered synthetic value" not in raw
     json.loads(raw)

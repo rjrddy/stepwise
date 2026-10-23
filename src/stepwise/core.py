@@ -26,6 +26,7 @@ class RecordedError(RuntimeError):
 
 def canonical(value: JSON) -> str:
     """Strict finite JSON only; no application objects or implicit string conversions."""
+
     def check(item: JSON, depth: int = 0) -> None:
         if depth > 24:
             raise ValueError("JSON nesting limit")
@@ -41,8 +42,11 @@ def canonical(value: JSON) -> str:
                 check(child, depth + 1)
         elif item is not None and not isinstance(item, (str, bool, int, float)):
             raise ValueError("JSON values only")
+
     check(value)
-    return json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=False, allow_nan=False)
+    return json.dumps(
+        value, sort_keys=True, separators=(",", ":"), ensure_ascii=False, allow_nan=False
+    )
 
 
 def redact(value: JSON, secrets: tuple[str, ...] = ()) -> JSON:
@@ -80,8 +84,13 @@ def validate_event(event: dict) -> None:
 class Tape:
     """A synchronous, single-worker SDK. Wrap model and tool callables explicitly."""
 
-    def __init__(self, sink: Callable[[dict], None] | None = None, *,
-                 replay: list[dict] | None = None, secrets: tuple[str, ...] = ()) -> None:
+    def __init__(
+        self,
+        sink: Callable[[dict], None] | None = None,
+        *,
+        replay: list[dict] | None = None,
+        secrets: tuple[str, ...] = (),
+    ) -> None:
         self.sink = sink
         self.source = copy.deepcopy(replay)
         self.secrets = secrets
@@ -95,7 +104,9 @@ class Tape:
                 raise Divergence("tape exhausted")
             event = self.source[self.cursor]
             if (kind, name, canonical(public)) != (
-                event["kind"], event["name"], canonical(event["input"])
+                event["kind"],
+                event["name"],
+                canonical(event["input"]),
             ):
                 raise Divergence(f"call mismatch at frame {self.cursor}")
             self.cursor += 1

@@ -5,7 +5,6 @@ from __future__ import annotations
 import os
 import uuid
 from contextlib import contextmanager
-from typing import Any
 
 import psycopg
 from psycopg.rows import dict_row
@@ -39,16 +38,25 @@ class Store:
 
     @contextmanager
     def connection(self):
-        with psycopg.connect(self.url, row_factory=dict_row, connect_timeout=3,
-                             options="-c statement_timeout=5000 -c lock_timeout=2000") as conn:
+        with psycopg.connect(
+            self.url,
+            row_factory=dict_row,
+            connect_timeout=3,
+            options="-c statement_timeout=5000 -c lock_timeout=2000",
+        ) as conn:
             yield conn
 
     def migrate(self) -> None:
         with self.connection() as conn:
             conn.execute(SCHEMA)
 
-    def create(self, label: str, mode: str = "sdk", breakpoint: int | None = None,
-               parent: str | None = None) -> str:
+    def create(
+        self,
+        label: str,
+        mode: str = "sdk",
+        breakpoint: int | None = None,
+        parent: str | None = None,
+    ) -> str:
         if not isinstance(label, str) or not 1 <= len(label) <= 120:
             raise ValueError("label length")
         if mode not in ("sdk", "demo"):
@@ -57,8 +65,10 @@ class Store:
             raise ValueError("invalid breakpoint")
         rid = str(uuid.uuid4())
         with self.connection() as conn:
-            conn.execute("INSERT INTO runs(id,label,mode,breakpoint,parent) VALUES(%s,%s,%s,%s,%s)",
-                         (rid, redact(label, self.secrets), mode, breakpoint, parent))
+            conn.execute(
+                "INSERT INTO runs(id,label,mode,breakpoint,parent) VALUES(%s,%s,%s,%s,%s)",
+                (rid, redact(label, self.secrets), mode, breakpoint, parent),
+            )
         return rid
 
     def list(self) -> list[dict]:
@@ -68,13 +78,16 @@ class Store:
 
     @staticmethod
     def public(row: dict) -> dict:
-        return {k: str(v) if k in ("id", "parent", "created_at") and v is not None else v
-                for k, v in row.items()}
+        return {
+            k: str(v) if k in ("id", "parent", "created_at") and v is not None else v
+            for k, v in row.items()
+        }
 
     @staticmethod
     def read_locked(conn, rid: str, lock: bool = False) -> dict:
-        row = conn.execute("SELECT * FROM runs WHERE id=%s" + (" FOR UPDATE" if lock else ""),
-                           (rid,)).fetchone()
+        row = conn.execute(
+            "SELECT * FROM runs WHERE id=%s" + (" FOR UPDATE" if lock else ""), (rid,)
+        ).fetchone()
         if row is None:
             raise KeyError("run not found")
         events = conn.execute("SELECT body FROM events WHERE run_id=%s ORDER BY seq", (rid,))
@@ -88,8 +101,9 @@ class Store:
     def insert(self, conn, rid: str, seq: int, event: dict) -> None:
         validate_event(event)
         public = redact(event, self.secrets)
-        conn.execute("INSERT INTO events(run_id,seq,body) VALUES(%s,%s,%s)",
-                     (rid, seq, Jsonb(public)))
+        conn.execute(
+            "INSERT INTO events(run_id,seq,body) VALUES(%s,%s,%s)", (rid, seq, Jsonb(public))
+        )
 
     def append(self, rid: str, seq: int, event: dict) -> dict:
         if type(seq) is not int or not 0 <= seq < 1000:
@@ -109,5 +123,7 @@ class Store:
 
 
 def configured() -> Store:
-    return Store(os.environ["DATABASE_URL"],
-                 tuple(filter(None, os.getenv("STEPWISE_SECRETS", "").split("|"))))
+    return Store(
+        os.environ["DATABASE_URL"],
+        tuple(filter(None, os.getenv("STEPWISE_SECRETS", "").split("|"))),
+    )

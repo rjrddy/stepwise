@@ -45,8 +45,11 @@ class Handler(BaseHTTPRequestHandler):
         self.send_header("Content-Length", str(len(data)))
         self.send_header("X-Content-Type-Options", "nosniff")
         self.send_header("Cache-Control", "no-store")
-        self.send_header("Content-Security-Policy", "default-src 'self'; style-src 'self'; "
-                         "script-src 'self'; img-src 'self' data:; frame-ancestors 'none'")
+        self.send_header(
+            "Content-Security-Policy",
+            "default-src 'self'; style-src 'self'; "
+            "script-src 'self'; img-src 'self' data:; frame-ancestors 'none'",
+        )
         self.end_headers()
         self.wfile.write(data)
 
@@ -62,14 +65,22 @@ class Handler(BaseHTTPRequestHandler):
                 if not candidate.is_file():
                     candidate = WEB / "index.html"
                 suffix = candidate.suffix
-                mime = {".html": "text/html; charset=utf-8", ".js": "text/javascript",
-                        ".css": "text/css", ".svg": "image/svg+xml"}.get(suffix)
+                mime = {
+                    ".html": "text/html; charset=utf-8",
+                    ".js": "text/javascript",
+                    ".css": "text/css",
+                    ".svg": "image/svg+xml",
+                }.get(suffix)
                 if not mime:
                     raise KeyError()
                 self.send(200, candidate.read_bytes(), mime)
                 return
-            if path != "/api/health" and self.server.token and not hmac.compare_digest(
-                self.headers.get("Authorization", ""), "Bearer " + self.server.token
+            if (
+                path != "/api/health"
+                and self.server.token
+                and not hmac.compare_digest(
+                    self.headers.get("Authorization", ""), "Bearer " + self.server.token
+                )
             ):
                 self.send(401, b'{"error":"authentication required"}')
                 return
@@ -89,8 +100,12 @@ class Handler(BaseHTTPRequestHandler):
                     raise ValueError()
             result = self.route(path, post, data)
             self.send(200, canonical(result).encode())
-            print(json.dumps({"event": "http", "status": 200, "operation": "write" if post else "read"}),
-                  flush=True)
+            print(
+                json.dumps(
+                    {"event": "http", "status": 200, "operation": "write" if post else "read"}
+                ),
+                flush=True,
+            )
         except Conflict:
             self.send(409, b'{"error":"revision or sequence conflict"}')
         except (ValueError, TypeError, IndexError, RecursionError):
@@ -110,10 +125,17 @@ class Handler(BaseHTTPRequestHandler):
             return {"status": "ready"}
         if path == "/api/runs":
             if post:
-                return {"id": store.create(data.get("label", "Untitled"), data.get("mode", "demo"),
-                                           data.get("breakpoint"))}
+                return {
+                    "id": store.create(
+                        data.get("label", "Untitled"),
+                        data.get("mode", "demo"),
+                        data.get("breakpoint"),
+                    )
+                }
             return store.list()
-        match = re.fullmatch(r"/api/runs/([0-9a-f-]{36})(?:/(events|advance|fork|replay|diff))?", path)
+        match = re.fullmatch(
+            r"/api/runs/([0-9a-f-]{36})(?:/(events|advance|fork|replay|diff))?", path
+        )
         if not match:
             raise KeyError()
         rid, action = match.groups()

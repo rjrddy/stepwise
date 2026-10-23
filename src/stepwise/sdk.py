@@ -15,8 +15,11 @@ class Client:
 
     def request(self, path: str, data: Any = None) -> Any:
         body = None if data is None else json.dumps(redact(data, self.secrets)).encode()
-        request = urllib.request.Request(self.base + path, data=body, headers={
-            "Content-Type": "application/json", "Authorization": "Bearer " + self.token})
+        request = urllib.request.Request(
+            self.base + path,
+            data=body,
+            headers={"Content-Type": "application/json", "Authorization": "Bearer " + self.token},
+        )
         with urllib.request.urlopen(request, timeout=10) as response:
             return json.load(response)
 

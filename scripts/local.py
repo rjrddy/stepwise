@@ -37,17 +37,37 @@ def main() -> None:
         with socket.socket() as selector:
             selector.bind(("127.0.0.1", 0))
             port = selector.getsockname()[1]
-        subprocess.run(["initdb", "-D", str(data), "-A", "trust", "--no-locale", "-E", "UTF8"],
-                       stdout=subprocess.DEVNULL, check=True)
-        subprocess.run([pg, "-D", str(data), "-l", str(Path(tmp) / "postgres.log"), "-o",
-                        f"-h 127.0.0.1 -p {port} -k {sock}", "-w", "start"], check=True,
-                       stdout=subprocess.DEVNULL)
-        env["DATABASE_URL"] = f"postgresql://{os.getenv('USER', 'postgres')}@127.0.0.1:{port}/postgres"
+        subprocess.run(
+            ["initdb", "-D", str(data), "-A", "trust", "--no-locale", "-E", "UTF8"],
+            stdout=subprocess.DEVNULL,
+            check=True,
+        )
+        subprocess.run(
+            [
+                pg,
+                "-D",
+                str(data),
+                "-l",
+                str(Path(tmp) / "postgres.log"),
+                "-o",
+                f"-h 127.0.0.1 -p {port} -k {sock}",
+                "-w",
+                "start",
+            ],
+            check=True,
+            stdout=subprocess.DEVNULL,
+        )
+        env["DATABASE_URL"] = (
+            f"postgresql://{os.getenv('USER', 'postgres')}@127.0.0.1:{port}/postgres"
+        )
         try:
             subprocess.run(command, cwd=ROOT, env=env, check=True)
         finally:
-            subprocess.run([pg, "-D", str(data), "-m", "immediate", "-w", "stop"],
-                           stdout=subprocess.DEVNULL, check=True)
+            subprocess.run(
+                [pg, "-D", str(data), "-m", "immediate", "-w", "stop"],
+                stdout=subprocess.DEVNULL,
+                check=True,
+            )
 
 
 if __name__ == "__main__":
