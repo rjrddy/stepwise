@@ -1,0 +1,22 @@
+{
+  "command": "make test bench",
+  "source_sha256": {
+    "src/stepwise/store.py": "981b082eea1660308d6ce4eadd1cc695debdcbf3c3a00e1df40775fa73ab08fd",
+    "src/stepwise/server.py": "d2bf06538b540540687d71e8aec9527115ed00aaed7353009a7a8a628454586b",
+    "src/stepwise/sdk.py": "a4db80aeb46a424470c6e43d5fce3fef5e2c8213f09f4b14021c6c03c9f76ca7",
+    "src/stepwise/__init__.py": "914ce58eefb01d63e566005bae57b5afe59119dd7c41eb9409f7ae442195462a",
+    "src/stepwise/core.py": "19c11953abcd56c270bb3b6ffbed3bd8608fcd9f8bf16b62a0000fc5c6d950a0",
+    "src/stepwise/workflow.py": "42b5e0575e2993c9c51709cac18a83aa35870faa9dd9d3f5dc248a2a7ff70ec0",
+    "sdk/node/index.mjs": "8b68028132ab874e3a47fb6cbfbcc5e257cf65075e2ac3c7d7b96e8b290654a3",
+    "apps/web/src/main.tsx": "c241e201689a73ac4fe53bf253168d8ec13e95aa52ffc666ae5d0ddaeb8c58e7",
+    "apps/web/src/style.css": "f059afa2391eb5780b2ebf5d664120d963757028c55e5a916f06ad2c79c2f404",
+    "scripts/bench.py": "fe42567f7e3d335c4487e1c53fa2419a4407a5e404651797e6c0c17b2ecdec79",
+    "scripts/bench_node.mjs": "6498946c5ae5a4e0f5a6c31082b398b3a6db69ad2122456674ffa052476d12ac"
+  },
+  "hardware": [
+    "Mac14,9",
+    "10",
+    "17179869184"
+  ],
+  "node": "v23.6.1"
+}

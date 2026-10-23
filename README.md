@@ -5,8 +5,8 @@ Nondeterministic agent calls hide failures; Stepwise records their boundaries so
 ## Result
 
 Exact redacted replay: 10 frames across original/repaired runs; 12 tests pass ([raw run](docs/results/gates-and-bench.txt), [hash proofs](docs/results/replay.json)).
-Python median call time: disabled 0.125 µs; memory capture 16.958 µs; synchronous HTTP/Postgres 3.058 ms ([samples](docs/results/bench.json)).
-Automated fault localization, 1000 events: raw JSONL 1.786 ms vs SQL 2.121 ms median; real UI recording 93.24 s ([browser proof](docs/results/browser/review.json)); human diagnosis time **not measured**.
+Python median call time: disabled 0.084 µs; memory capture 18.167 µs; synchronous HTTP/Postgres 3.127 ms ([samples](docs/results/bench.json)).
+Automated fault localization, 1000 events: raw JSONL 1.885 ms vs SQL 2.008 ms median; real UI recording 93.24 s ([browser proof](docs/results/browser/review.json)); human diagnosis time **not measured**.
 
 ## Architecture
 

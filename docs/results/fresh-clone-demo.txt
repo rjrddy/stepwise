@@ -1,0 +1,102 @@
+python3 -m venv .venv
+.venv/bin/python -m pip install -e . -r requirements-dev.txt
+Obtaining file:///private/var/folders/tx/r4bmp29x58v41hgmtzrwwx3h0000gn/T/stepwise-clone-t04b3r20/repo
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Checking if build backend supports build_editable: started
+  Checking if build backend supports build_editable: finished with status 'done'
+  Getting requirements to build editable: started
+  Getting requirements to build editable: finished with status 'done'
+  Preparing editable metadata (pyproject.toml): started
+  Preparing editable metadata (pyproject.toml): finished with status 'done'
+Requirement already satisfied: pip==26.2.2 in ./.venv/lib/python3.13/site-packages (from -r requirements-dev.txt (line 1)) (26.2.2)
+Requirement already satisfied: pytest==9.1.1 in ./.venv/lib/python3.13/site-packages (from -r requirements-dev.txt (line 2)) (9.1.1)
+Requirement already satisfied: ruff==0.17.1 in ./.venv/lib/python3.13/site-packages (from -r requirements-dev.txt (line 3)) (0.17.1)
+Requirement already satisfied: pip-audit==2.9.0 in ./.venv/lib/python3.13/site-packages (from -r requirements-dev.txt (line 4)) (2.9.0)
+Requirement already satisfied: psycopg==3.3.6 in ./.venv/lib/python3.13/site-packages (from psycopg[binary]==3.3.6->stepwise-debugger==0.1.0) (3.3.6)
+Requirement already satisfied: iniconfig>=1.0.1 in ./.venv/lib/python3.13/site-packages (from pytest==9.1.1->-r requirements-dev.txt (line 2)) (2.3.1)
+Requirement already satisfied: packaging>=22 in ./.venv/lib/python3.13/site-packages (from pytest==9.1.1->-r requirements-dev.txt (line 2)) (26.3)
+Requirement already satisfied: pluggy<2,>=1.5 in ./.venv/lib/python3.13/site-packages (from pytest==9.1.1->-r requirements-dev.txt (line 2)) (1.7.0)
+Requirement already satisfied: pygments>=2.7.2 in ./.venv/lib/python3.13/site-packages (from pytest==9.1.1->-r requirements-dev.txt (line 2)) (2.21.0)
+Requirement already satisfied: CacheControl>=0.13.0 in ./.venv/lib/python3.13/site-packages (from CacheControl[filecache]>=0.13.0->pip-audit==2.9.0->-r requirements-dev.txt (line 4)) (0.14.4)
+Requirement already satisfied: cyclonedx-python-lib<10,>=5 in ./.venv/lib/python3.13/site-packages (from pip-audit==2.9.0->-r requirements-dev.txt (line 4)) (9.1.0)
+Requirement already satisfied: pip-api>=0.0.28 in ./.venv/lib/python3.13/site-packages (from pip-audit==2.9.0->-r requirements-dev.txt (line 4)) (0.0.35)
+Requirement already satisfied: pip-requirements-parser>=32.0.0 in ./.venv/lib/python3.13/site-packages (from pip-audit==2.9.0->-r requirements-dev.txt (line 4)) (32.0.1)
+Requirement already satisfied: requests>=2.31.0 in ./.venv/lib/python3.13/site-packages (from pip-audit==2.9.0->-r requirements-dev.txt (line 4)) (2.34.2)
+Requirement already satisfied: rich>=12.4 in ./.venv/lib/python3.13/site-packages (from pip-audit==2.9.0->-r requirements-dev.txt (line 4)) (15.0.0)
+Requirement already satisfied: toml>=0.10 in ./.venv/lib/python3.13/site-packages (from pip-audit==2.9.0->-r requirements-dev.txt (line 4)) (0.10.2)
+Requirement already satisfied: platformdirs>=4.2.0 in ./.venv/lib/python3.13/site-packages (from pip-audit==2.9.0->-r requirements-dev.txt (line 4)) (4.13.5)
+Requirement already satisfied: psycopg-binary==3.3.6 in ./.venv/lib/python3.13/site-packages (from psycopg[binary]==3.3.6->stepwise-debugger==0.1.0) (3.3.6)
+Requirement already satisfied: license-expression<31,>=30 in ./.venv/lib/python3.13/site-packages (from cyclonedx-python-lib<10,>=5->pip-audit==2.9.0->-r requirements-dev.txt (line 4)) (30.4.4)
+Requirement already satisfied: packageurl-python<2,>=0.11 in ./.venv/lib/python3.13/site-packages (from cyclonedx-python-lib<10,>=5->pip-audit==2.9.0->-r requirements-dev.txt (line 4)) (0.17.6)
+Requirement already satisfied: py-serializable<3.0.0,>=2.0.0 in ./.venv/lib/python3.13/site-packages (from cyclonedx-python-lib<10,>=5->pip-audit==2.9.0->-r requirements-dev.txt (line 4)) (2.1.0)
+Requirement already satisfied: sortedcontainers<3.0.0,>=2.4.0 in ./.venv/lib/python3.13/site-packages (from cyclonedx-python-lib<10,>=5->pip-audit==2.9.0->-r requirements-dev.txt (line 4)) (2.4.0)
+Requirement already satisfied: boolean.py>=4.0 in ./.venv/lib/python3.13/site-packages (from license-expression<31,>=30->cyclonedx-python-lib<10,>=5->pip-audit==2.9.0->-r requirements-dev.txt (line 4)) (5.0)
+Requirement already satisfied: defusedxml<0.8.0,>=0.7.1 in ./.venv/lib/python3.13/site-packages (from py-serializable<3.0.0,>=2.0.0->cyclonedx-python-lib<10,>=5->pip-audit==2.9.0->-r requirements-dev.txt (line 4)) (0.7.1)
+Requirement already satisfied: msgpack<2.0.0,>=0.5.2 in ./.venv/lib/python3.13/site-packages (from CacheControl>=0.13.0->CacheControl[filecache]>=0.13.0->pip-audit==2.9.0->-r requirements-dev.txt (line 4)) (1.2.3)
+Requirement already satisfied: filelock>=3.8.0 in ./.venv/lib/python3.13/site-packages (from CacheControl[filecache]>=0.13.0->pip-audit==2.9.0->-r requirements-dev.txt (line 4)) (4.2.4)
+Requirement already satisfied: pyparsing in ./.venv/lib/python3.13/site-packages (from pip-requirements-parser>=32.0.0->pip-audit==2.9.0->-r requirements-dev.txt (line 4)) (3.3.3)
+Requirement already satisfied: charset_normalizer<4,>=2 in ./.venv/lib/python3.13/site-packages (from requests>=2.31.0->pip-audit==2.9.0->-r requirements-dev.txt (line 4)) (3.5.2)
+Requirement already satisfied: idna<4,>=2.5 in ./.venv/lib/python3.13/site-packages (from requests>=2.31.0->pip-audit==2.9.0->-r requirements-dev.txt (line 4)) (3.20)
+Requirement already satisfied: urllib3<3,>=1.26 in ./.venv/lib/python3.13/site-packages (from requests>=2.31.0->pip-audit==2.9.0->-r requirements-dev.txt (line 4)) (2.8.0)
+Requirement already satisfied: certifi>=2023.5.7 in ./.venv/lib/python3.13/site-packages (from requests>=2.31.0->pip-audit==2.9.0->-r requirements-dev.txt (line 4)) (2026.10.19)
+Requirement already satisfied: markdown-it-py>=2.2.0 in ./.venv/lib/python3.13/site-packages (from rich>=12.4->pip-audit==2.9.0->-r requirements-dev.txt (line 4)) (4.2.0)
+Requirement already satisfied: mdurl~=0.1 in ./.venv/lib/python3.13/site-packages (from markdown-it-py>=2.2.0->rich>=12.4->pip-audit==2.9.0->-r requirements-dev.txt (line 4)) (0.1.2)
+Building wheels for collected packages: stepwise-debugger
+  Building editable for stepwise-debugger (pyproject.toml): started
+  Building editable for stepwise-debugger (pyproject.toml): finished with status 'done'
+  Created wheel for stepwise-debugger: filename=stepwise_debugger-0.1.0-0.editable-py3-none-any.whl size=1372 sha256=463b2b082e6407bf57c7ae73daed6f384670cc98418c527c8e33072b9d5b212c
+  Stored in directory: /private/var/folders/tx/r4bmp29x58v41hgmtzrwwx3h0000gn/T/pip-ephem-wheel-cache-cyz8gaav/wheels/bb/eb/90/677177971e7094fcd1796253acabaca72f337330b221a9bdc4
+Successfully built stepwise-debugger
+Installing collected packages: stepwise-debugger
+  Attempting uninstall: stepwise-debugger
+    Found existing installation: stepwise-debugger 0.1.0
+    Uninstalling stepwise-debugger-0.1.0:
+      Successfully uninstalled stepwise-debugger-0.1.0
+Successfully installed stepwise-debugger-0.1.0
+npm --prefix apps/web ci
+
+added 22 packages, and audited 23 packages in 776ms
+
+6 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+npm --prefix apps/web run build
+
+> stepwise-edit-room@0.1.0 build
+> tsc --noEmit && vite build
+
+vite v6.4.4 building for production...
+transforming...
+✓ 28 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.41 kB │ gzip:  0.29 kB
+dist/assets/index-BQnipaaT.css    8.19 kB │ gzip:  2.41 kB
+dist/assets/index-DGEQaNZl.js   204.57 kB │ gzip: 64.23 kB
+✓ built in 445ms
+.venv/bin/python scripts/local.py serve
+{"event": "ready", "url": "http://127.0.0.1:49334"}
+{"event": "http", "status": 200, "operation": "write"}
+{"event": "http", "status": 200, "operation": "read"}
+{"event": "http", "status": 200, "operation": "write"}
+{"event": "http", "status": 200, "operation": "write"}
+{"event": "http", "status": 200, "operation": "write"}
+{"event": "http", "status": 200, "operation": "write"}
+{"event": "http", "status": 200, "operation": "write"}
+{"event": "http", "status": 200, "operation": "write"}
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/private/var/folders/tx/r4bmp29x58v41hgmtzrwwx3h0000gn/T/stepwise-clone-t04b3r20/repo/src/stepwise/server.py", line 180, in <module>
+    main()
+    ~~~~^^
+  File "/private/var/folders/tx/r4bmp29x58v41hgmtzrwwx3h0000gn/T/stepwise-clone-t04b3r20/repo/src/stepwise/server.py", line 176, in main
+    server.serve_forever()
+    ~~~~~~~~~~~~~~~~~~~~^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.2/Frameworks/Python.framework/Versions/3.13/lib/python3.13/socketserver.py", line 235, in serve_forever
+    ready = selector.select(poll_interval)
+  File "/opt/homebrew/Cellar/python@3.13/3.13.2/Frameworks/Python.framework/Versions/3.13/lib/python3.13/selectors.py", line 398, in select
+    fd_event_list = self._selector.poll(timeout)
+KeyboardInterrupt

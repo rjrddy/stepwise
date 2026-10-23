@@ -1,0 +1,20 @@
+{
+  "source_commit": "355cc6892cdb71db75985aaf13c03c9537c2dc0f",
+  "checks": [
+    "setup",
+    "build",
+    "lint",
+    "test",
+    "actual make demo",
+    "static UI",
+    "real workflow",
+    "exact replay"
+  ],
+  "proof": {
+    "exact": true,
+    "frames": 5,
+    "provider_calls": 0,
+    "recorded_sha256": "0b280756bd47679b6b8943fc60c138c9c77d23a63d64cc513ca85cbcd6c24b87",
+    "replay_sha256": "0b280756bd47679b6b8943fc60c138c9c77d23a63d64cc513ca85cbcd6c24b87"
+  }
+}

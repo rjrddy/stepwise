@@ -1,0 +1,751 @@
+verify	Set up job	﻿2026-10-23T02:46:44.6549045Z Current runner version: '2.338.0'
+verify	Set up job	2026-10-23T02:46:44.6574894Z ##[group]Runner Image Provisioner
+verify	Set up job	2026-10-23T02:46:44.6575748Z Hosted Compute Agent
+verify	Set up job	2026-10-23T02:46:44.6576415Z Version: 20261012.601
+verify	Set up job	2026-10-23T02:46:44.6577075Z Commit: f3dc54e1fb89da6852db922499a0233137369e1d
+verify	Set up job	2026-10-23T02:46:44.6577822Z Build Date: 2026-10-12T17:48:21Z
+verify	Set up job	2026-10-23T02:46:44.6578573Z Worker ID: {39b2475f-157c-447a-9767-7b9e8e866680}
+verify	Set up job	2026-10-23T02:46:44.6579292Z Region: westus
+verify	Set up job	2026-10-23T02:46:44.6579914Z Cloud: Azure
+verify	Set up job	2026-10-23T02:46:44.6580848Z ##[endgroup]
+verify	Set up job	2026-10-23T02:46:44.6582525Z ##[group]Operating System
+verify	Set up job	2026-10-23T02:46:44.6583334Z Ubuntu
+verify	Set up job	2026-10-23T02:46:44.6583856Z 26.04.1
+verify	Set up job	2026-10-23T02:46:44.6584745Z LTS
+verify	Set up job	2026-10-23T02:46:44.6585293Z ##[endgroup]
+verify	Set up job	2026-10-23T02:46:44.6586035Z ##[group]Runner Image
+verify	Set up job	2026-10-23T02:46:44.6586692Z Image: ubuntu-26.04
+verify	Set up job	2026-10-23T02:46:44.6587253Z Version: 20261012.163.1
+verify	Set up job	2026-10-23T02:46:44.6588456Z Included Software: https://github.com/actions/runner-images/blob/ubuntu26/20261012.163/images/ubuntu/Ubuntu2604-Readme.md
+verify	Set up job	2026-10-23T02:46:44.6590197Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu26%2F20261012.163
+verify	Set up job	2026-10-23T02:46:44.6591634Z ##[endgroup]
+verify	Set up job	2026-10-23T02:46:44.6592743Z ##[group]GITHUB_TOKEN Permissions
+verify	Set up job	2026-10-23T02:46:44.6594932Z Contents: read
+verify	Set up job	2026-10-23T02:46:44.6595591Z Metadata: read
+verify	Set up job	2026-10-23T02:46:44.6596201Z ##[endgroup]
+verify	Set up job	2026-10-23T02:46:44.6598231Z Secret source: Actions
+verify	Set up job	2026-10-23T02:46:44.6599135Z Cache mode: write
+verify	Set up job	2026-10-23T02:46:44.6600227Z Prepare workflow directory
+verify	Set up job	2026-10-23T02:46:44.7061651Z Prepare all required actions
+verify	Set up job	2026-10-23T02:46:44.7109937Z Getting action download info
+verify	Set up job	2026-10-23T02:46:45.0654564Z Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+verify	Set up job	2026-10-23T02:46:45.1720830Z Download action repository 'actions/setup-python@v5' (SHA:a26af69be951a213d495a4c3e4e4022e16d87065)
+verify	Set up job	2026-10-23T02:46:45.2316355Z Download action repository 'actions/setup-node@v4' (SHA:49933ea5288caeca8642d1e84afbd3f7d6820020)
+verify	Set up job	2026-10-23T02:46:45.4043733Z Complete job name: verify
+verify	Initialize containers	﻿2026-10-23T02:46:45.4592373Z ##[group]Checking docker version
+verify	Initialize containers	2026-10-23T02:46:45.4606393Z ##[command]/usr/bin/docker version --format '{{.Server.APIVersion}}'
+verify	Initialize containers	2026-10-23T02:46:45.5592689Z '1.54'
+verify	Initialize containers	2026-10-23T02:46:45.5610811Z Docker daemon API version: '1.54'
+verify	Initialize containers	2026-10-23T02:46:45.5611718Z ##[command]/usr/bin/docker version --format '{{.Client.APIVersion}}'
+verify	Initialize containers	2026-10-23T02:46:45.5809360Z '1.54'
+verify	Initialize containers	2026-10-23T02:46:45.5828499Z Docker client API version: '1.54'
+verify	Initialize containers	2026-10-23T02:46:45.5834803Z ##[endgroup]
+verify	Initialize containers	2026-10-23T02:46:45.5838263Z ##[group]Clean up resources from previous jobs
+verify	Initialize containers	2026-10-23T02:46:45.5844159Z ##[command]/usr/bin/docker ps --all --quiet --no-trunc --filter "label=148324"
+verify	Initialize containers	2026-10-23T02:46:45.6016674Z ##[command]/usr/bin/docker network prune --force --filter "label=148324"
+verify	Initialize containers	2026-10-23T02:46:45.6179440Z ##[endgroup]
+verify	Initialize containers	2026-10-23T02:46:45.6180043Z ##[group]Create local container network
+verify	Initialize containers	2026-10-23T02:46:45.6191318Z ##[command]/usr/bin/docker network create --label 148324 github_network_c91e128308e74dea98c81f0bec65932d
+verify	Initialize containers	2026-10-23T02:46:45.6761219Z 1ab06f473bafed8231438096a1fdefca35622b4bb382fa6ba5e99c8a5badaa96
+verify	Initialize containers	2026-10-23T02:46:45.6787575Z ##[endgroup]
+verify	Initialize containers	2026-10-23T02:46:45.6812979Z ##[group]Starting postgres service container
+verify	Initialize containers	2026-10-23T02:46:45.6835792Z ##[command]/usr/bin/docker pull postgres:17-bookworm
+verify	Initialize containers	2026-10-23T02:46:46.4608859Z 17-bookworm: Pulling from library/postgres
+verify	Initialize containers	2026-10-23T02:46:46.6918632Z eb2a6aab6a8e: Pulling fs layer
+verify	Initialize containers	2026-10-23T02:46:46.6923083Z ebb1e532806b: Pulling fs layer
+verify	Initialize containers	2026-10-23T02:46:46.6924116Z 80015fd97697: Pulling fs layer
+verify	Initialize containers	2026-10-23T02:46:46.6925091Z b69f574b66a3: Pulling fs layer
+verify	Initialize containers	2026-10-23T02:46:46.6926062Z abc91d04c190: Pulling fs layer
+verify	Initialize containers	2026-10-23T02:46:46.6927109Z c5f39862cce6: Pulling fs layer
+verify	Initialize containers	2026-10-23T02:46:46.6928354Z 66361375bc70: Pulling fs layer
+verify	Initialize containers	2026-10-23T02:46:46.6929172Z 11422d7ca1a4: Pulling fs layer
+verify	Initialize containers	2026-10-23T02:46:46.6930744Z 1dc57ea82d8b: Pulling fs layer
+verify	Initialize containers	2026-10-23T02:46:46.6932127Z 2433825d376d: Pulling fs layer
+verify	Initialize containers	2026-10-23T02:46:46.6933818Z 3d633189a257: Pulling fs layer
+verify	Initialize containers	2026-10-23T02:46:46.6935001Z 34c01ab7a545: Pulling fs layer
+verify	Initialize containers	2026-10-23T02:46:46.6936256Z 32ac211a4068: Pulling fs layer
+verify	Initialize containers	2026-10-23T02:46:46.6937861Z a03cba1ee28f: Pulling fs layer
+verify	Initialize containers	2026-10-23T02:46:46.9030376Z 66361375bc70: Download complete
+verify	Initialize containers	2026-10-23T02:46:46.9042497Z a03cba1ee28f: Download complete
+verify	Initialize containers	2026-10-23T02:46:47.0010270Z eb2a6aab6a8e: Download complete
+verify	Initialize containers	2026-10-23T02:46:47.0023931Z 3d633189a257: Download complete
+verify	Initialize containers	2026-10-23T02:46:47.0033033Z 80015fd97697: Download complete
+verify	Initialize containers	2026-10-23T02:46:47.0044323Z 1dc57ea82d8b: Download complete
+verify	Initialize containers	2026-10-23T02:46:47.0062826Z 2433825d376d: Download complete
+verify	Initialize containers	2026-10-23T02:46:47.0070622Z 34c01ab7a545: Download complete
+verify	Initialize containers	2026-10-23T02:46:47.0095867Z ebb1e532806b: Download complete
+verify	Initialize containers	2026-10-23T02:46:47.0108487Z abc91d04c190: Download complete
+verify	Initialize containers	2026-10-23T02:46:47.0110113Z 32ac211a4068: Download complete
+verify	Initialize containers	2026-10-23T02:46:47.0135111Z b69f574b66a3: Download complete
+verify	Initialize containers	2026-10-23T02:46:47.2041827Z 9ebd972eb67f: Download complete
+verify	Initialize containers	2026-10-23T02:46:47.2044797Z 11422d7ca1a4: Download complete
+verify	Initialize containers	2026-10-23T02:46:47.3024489Z f7351f0ca88e: Download complete
+verify	Initialize containers	2026-10-23T02:46:47.4008550Z c5f39862cce6: Download complete
+verify	Initialize containers	2026-10-23T02:46:48.0033243Z a03cba1ee28f: Pull complete
+verify	Initialize containers	2026-10-23T02:46:48.0203973Z 11422d7ca1a4: Pull complete
+verify	Initialize containers	2026-10-23T02:46:48.1050893Z 80015fd97697: Pull complete
+verify	Initialize containers	2026-10-23T02:46:48.1139818Z 32ac211a4068: Pull complete
+verify	Initialize containers	2026-10-23T02:46:48.3046149Z 3d633189a257: Pull complete
+verify	Initialize containers	2026-10-23T02:46:48.3132471Z ebb1e532806b: Pull complete
+verify	Initialize containers	2026-10-23T02:46:48.3168086Z abc91d04c190: Pull complete
+verify	Initialize containers	2026-10-23T02:46:48.3186219Z b69f574b66a3: Pull complete
+verify	Initialize containers	2026-10-23T02:46:50.1137654Z c5f39862cce6: Pull complete
+verify	Initialize containers	2026-10-23T02:46:50.1572288Z 66361375bc70: Pull complete
+verify	Initialize containers	2026-10-23T02:46:50.1597281Z eb2a6aab6a8e: Pull complete
+verify	Initialize containers	2026-10-23T02:46:50.1616470Z 1dc57ea82d8b: Pull complete
+verify	Initialize containers	2026-10-23T02:46:50.1632427Z 2433825d376d: Pull complete
+verify	Initialize containers	2026-10-23T02:46:50.1645744Z 34c01ab7a545: Pull complete
+verify	Initialize containers	2026-10-23T02:46:50.1646855Z Digest: sha256:858bb5e98eed02eb8cafbcdc007f9a65d1b613972028944a8ec2133ccaf80d27
+verify	Initialize containers	2026-10-23T02:46:50.1648456Z Status: Downloaded newer image for postgres:17-bookworm
+verify	Initialize containers	2026-10-23T02:46:50.1657908Z docker.io/library/postgres:17-bookworm
+verify	Initialize containers	2026-10-23T02:46:50.1745882Z ##[command]/usr/bin/docker create --name 6e8a2d006c1f4c04ad0b046b0e0170b2_postgres17bookworm_f1a567 --label 148324 --network github_network_c91e128308e74dea98c81f0bec65932d --network-alias postgres -p 5432:5432 --health-cmd "pg_isready -U postgres -d stepwise" --health-interval 2s --health-timeout 3s --health-retries 30 -e "POSTGRES_PASSWORD=synthetic-ci-password" -e "POSTGRES_DB=stepwise" -e GITHUB_ACTIONS=true -e CI=true postgres:17-bookworm
+verify	Initialize containers	2026-10-23T02:46:53.1342132Z a65ae2a7b3786efc4d0469a361f6b78d963dc5511b136b6c887dee236664b850
+verify	Initialize containers	2026-10-23T02:46:53.1369941Z ##[command]/usr/bin/docker start a65ae2a7b3786efc4d0469a361f6b78d963dc5511b136b6c887dee236664b850
+verify	Initialize containers	2026-10-23T02:46:53.3561813Z a65ae2a7b3786efc4d0469a361f6b78d963dc5511b136b6c887dee236664b850
+verify	Initialize containers	2026-10-23T02:46:53.3592902Z ##[command]/usr/bin/docker ps --all --filter id=a65ae2a7b3786efc4d0469a361f6b78d963dc5511b136b6c887dee236664b850 --filter status=running --no-trunc --format "{{.ID}} {{.Status}}"
+verify	Initialize containers	2026-10-23T02:46:53.3915097Z a65ae2a7b3786efc4d0469a361f6b78d963dc5511b136b6c887dee236664b850 Up Less than a second (health: starting)
+verify	Initialize containers	2026-10-23T02:46:53.3942005Z ##[command]/usr/bin/docker port a65ae2a7b3786efc4d0469a361f6b78d963dc5511b136b6c887dee236664b850
+verify	Initialize containers	2026-10-23T02:46:53.4105533Z 5432/tcp -> 0.0.0.0:5432
+verify	Initialize containers	2026-10-23T02:46:53.4106653Z 5432/tcp -> [::]:5432
+verify	Initialize containers	2026-10-23T02:46:53.4173649Z ##[endgroup]
+verify	Initialize containers	2026-10-23T02:46:53.4185767Z ##[group]Waiting for all services to be ready
+verify	Initialize containers	2026-10-23T02:46:53.4204599Z ##[command]/usr/bin/docker inspect --format="{{if .Config.Healthcheck}}{{print .State.Health.Status}}{{end}}" a65ae2a7b3786efc4d0469a361f6b78d963dc5511b136b6c887dee236664b850
+verify	Initialize containers	2026-10-23T02:46:53.4365228Z starting
+verify	Initialize containers	2026-10-23T02:46:53.4397367Z postgres service is starting, waiting 2 seconds before checking again.
+verify	Initialize containers	2026-10-23T02:46:55.4401056Z ##[command]/usr/bin/docker inspect --format="{{if .Config.Healthcheck}}{{print .State.Health.Status}}{{end}}" a65ae2a7b3786efc4d0469a361f6b78d963dc5511b136b6c887dee236664b850
+verify	Initialize containers	2026-10-23T02:46:55.4546254Z healthy
+verify	Initialize containers	2026-10-23T02:46:55.4566806Z postgres service is healthy.
+verify	Initialize containers	2026-10-23T02:46:55.4567237Z ##[endgroup]
+verify	Run actions/checkout@v4	﻿2026-10-23T02:46:55.4943947Z ##[group]Run actions/checkout@v4
+verify	Run actions/checkout@v4	2026-10-23T02:46:55.4944536Z with:
+verify	Run actions/checkout@v4	2026-10-23T02:46:55.4944759Z   repository: rjrddy/stepwise
+verify	Run actions/checkout@v4	2026-10-23T02:46:55.4947437Z   token: ***
+verify	Run actions/checkout@v4	2026-10-23T02:46:55.4947644Z   ssh-strict: true
+verify	Run actions/checkout@v4	2026-10-23T02:46:55.4947856Z   ssh-user: git
+verify	Run actions/checkout@v4	2026-10-23T02:46:55.4948071Z   persist-credentials: true
+verify	Run actions/checkout@v4	2026-10-23T02:46:55.4948309Z   clean: true
+verify	Run actions/checkout@v4	2026-10-23T02:46:55.4948518Z   sparse-checkout-cone-mode: true
+verify	Run actions/checkout@v4	2026-10-23T02:46:55.4948774Z   fetch-depth: 1
+verify	Run actions/checkout@v4	2026-10-23T02:46:55.4948972Z   fetch-tags: false
+verify	Run actions/checkout@v4	2026-10-23T02:46:55.4949171Z   show-progress: true
+verify	Run actions/checkout@v4	2026-10-23T02:46:55.4949377Z   lfs: false
+verify	Run actions/checkout@v4	2026-10-23T02:46:55.4949576Z   submodules: false
+verify	Run actions/checkout@v4	2026-10-23T02:46:55.4949782Z   set-safe-directory: true
+verify	Run actions/checkout@v4	2026-10-23T02:46:55.4950022Z   allow-unsafe-pr-checkout: false
+verify	Run actions/checkout@v4	2026-10-23T02:46:55.4950718Z env:
+verify	Run actions/checkout@v4	2026-10-23T02:46:55.4951233Z   DATABASE_URL: ***127.0.0.1:5432/stepwise
+verify	Run actions/checkout@v4	2026-10-23T02:46:55.4951515Z ##[endgroup]
+verify	Run actions/checkout@v4	2026-10-23T02:46:55.5946550Z Syncing repository: rjrddy/stepwise
+verify	Run actions/checkout@v4	2026-10-23T02:46:55.5947950Z ##[group]Getting Git version info
+verify	Run actions/checkout@v4	2026-10-23T02:46:55.5948436Z Working directory is '/home/runner/work/stepwise/stepwise'
+verify	Run actions/checkout@v4	2026-10-23T02:46:55.5949005Z [command]/usr/bin/git version
+verify	Run actions/checkout@v4	2026-10-23T02:46:55.5991902Z git version 2.55.0
+verify	Run actions/checkout@v4	2026-10-23T02:46:55.6026851Z ##[endgroup]
+verify	Run actions/checkout@v4	2026-10-23T02:46:55.6034492Z Temporarily overriding HOME='/home/runner/work/_temp/0b6cc431-8ef6-48a0-a074-655f4dd533b8' before making global git config changes
+verify	Run actions/checkout@v4	2026-10-23T02:46:55.6035574Z Adding repository directory to the temporary git global config as a safe directory
+verify	Run actions/checkout@v4	2026-10-23T02:46:55.6042747Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/stepwise/stepwise
+verify	Run actions/checkout@v4	2026-10-23T02:46:55.6105482Z Deleting the contents of '/home/runner/work/stepwise/stepwise'
+verify	Run actions/checkout@v4	2026-10-23T02:46:55.6108674Z ##[group]Initializing the repository
+verify	Run actions/checkout@v4	2026-10-23T02:46:55.6115711Z [command]/usr/bin/git init /home/runner/work/stepwise/stepwise
+verify	Run actions/checkout@v4	2026-10-23T02:46:55.6238910Z hint: Using 'master' as the name for the initial branch. This default branch name
+verify	Run actions/checkout@v4	2026-10-23T02:46:55.6246337Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+verify	Run actions/checkout@v4	2026-10-23T02:46:55.6247432Z hint: to use in all of your new repositories, which will suppress this warning,
+verify	Run actions/checkout@v4	2026-10-23T02:46:55.6248151Z hint: call:
+verify	Run actions/checkout@v4	2026-10-23T02:46:55.6248598Z hint:
+verify	Run actions/checkout@v4	2026-10-23T02:46:55.6249177Z hint: 	git config --global init.defaultBranch <name>
+verify	Run actions/checkout@v4	2026-10-23T02:46:55.6249760Z hint:
+verify	Run actions/checkout@v4	2026-10-23T02:46:55.6250255Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+verify	Run actions/checkout@v4	2026-10-23T02:46:55.6251246Z hint: 'development'. The just-created branch can be renamed via this command:
+verify	Run actions/checkout@v4	2026-10-23T02:46:55.6251666Z hint:
+verify	Run actions/checkout@v4	2026-10-23T02:46:55.6251887Z hint: 	git branch -m <name>
+verify	Run actions/checkout@v4	2026-10-23T02:46:55.6252120Z hint:
+verify	Run actions/checkout@v4	2026-10-23T02:46:55.6252456Z hint: Disable this message with "git config set advice.defaultBranchName false"
+verify	Run actions/checkout@v4	2026-10-23T02:46:55.6253004Z Initialized empty Git repository in /home/runner/work/stepwise/stepwise/.git/
+verify	Run actions/checkout@v4	2026-10-23T02:46:55.6256323Z [command]/usr/bin/git remote add origin https://github.com/rjrddy/stepwise
+verify	Run actions/checkout@v4	2026-10-23T02:46:55.6308171Z ##[endgroup]
+verify	Run actions/checkout@v4	2026-10-23T02:46:55.6308658Z ##[group]Disabling automatic garbage collection
+verify	Run actions/checkout@v4	2026-10-23T02:46:55.6313531Z [command]/usr/bin/git config --local gc.auto 0
+verify	Run actions/checkout@v4	2026-10-23T02:46:55.6354370Z ##[endgroup]
+verify	Run actions/checkout@v4	2026-10-23T02:46:55.6354753Z ##[group]Setting up auth
+verify	Run actions/checkout@v4	2026-10-23T02:46:55.6363054Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+verify	Run actions/checkout@v4	2026-10-23T02:46:55.6400087Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+verify	Run actions/checkout@v4	2026-10-23T02:46:55.6891446Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+verify	Run actions/checkout@v4	2026-10-23T02:46:55.6934237Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+verify	Run actions/checkout@v4	2026-10-23T02:46:55.7228288Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+verify	Run actions/checkout@v4	2026-10-23T02:46:55.7265492Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+verify	Run actions/checkout@v4	2026-10-23T02:46:55.7545168Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+verify	Run actions/checkout@v4	2026-10-23T02:46:55.7589365Z ##[endgroup]
+verify	Run actions/checkout@v4	2026-10-23T02:46:55.7590221Z ##[group]Fetching the repository
+verify	Run actions/checkout@v4	2026-10-23T02:46:55.7602460Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +3822a66b38d8e2e8a6888c3ca3adf417cb2341c8:refs/remotes/origin/main
+verify	Run actions/checkout@v4	2026-10-23T02:46:57.8934437Z From https://github.com/rjrddy/stepwise
+verify	Run actions/checkout@v4	2026-10-23T02:46:57.8941425Z  * [new ref]         3822a66b38d8e2e8a6888c3ca3adf417cb2341c8 -> origin/main
+verify	Run actions/checkout@v4	2026-10-23T02:46:57.8943930Z ##[endgroup]
+verify	Run actions/checkout@v4	2026-10-23T02:46:57.8944710Z ##[group]Determining the checkout info
+verify	Run actions/checkout@v4	2026-10-23T02:46:57.8945765Z ##[endgroup]
+verify	Run actions/checkout@v4	2026-10-23T02:46:57.8951176Z [command]/usr/bin/git sparse-checkout disable
+verify	Run actions/checkout@v4	2026-10-23T02:46:57.9008902Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+verify	Run actions/checkout@v4	2026-10-23T02:46:57.9041940Z ##[group]Checking out the ref
+verify	Run actions/checkout@v4	2026-10-23T02:46:57.9046953Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+verify	Run actions/checkout@v4	2026-10-23T02:46:58.0511629Z Switched to a new branch 'main'
+verify	Run actions/checkout@v4	2026-10-23T02:46:58.0513086Z branch 'main' set up to track 'origin/main'.
+verify	Run actions/checkout@v4	2026-10-23T02:46:58.0521411Z ##[endgroup]
+verify	Run actions/checkout@v4	2026-10-23T02:46:58.0628646Z [command]/usr/bin/git log -1 --format=%H
+verify	Run actions/checkout@v4	2026-10-23T02:46:58.0656232Z 3822a66b38d8e2e8a6888c3ca3adf417cb2341c8
+verify	Run actions/setup-python@v5	﻿2026-10-23T02:46:58.0919603Z ##[group]Run actions/setup-python@v5
+verify	Run actions/setup-python@v5	2026-10-23T02:46:58.0919916Z with:
+verify	Run actions/setup-python@v5	2026-10-23T02:46:58.0920111Z   python-version: 3.13
+verify	Run actions/setup-python@v5	2026-10-23T02:46:58.0920520Z   check-latest: false
+verify	Run actions/setup-python@v5	2026-10-23T02:46:58.0923051Z   token: ***
+verify	Run actions/setup-python@v5	2026-10-23T02:46:58.0923283Z   update-environment: true
+verify	Run actions/setup-python@v5	2026-10-23T02:46:58.0923524Z   allow-prereleases: false
+verify	Run actions/setup-python@v5	2026-10-23T02:46:58.0923750Z   freethreaded: false
+verify	Run actions/setup-python@v5	2026-10-23T02:46:58.0923956Z env:
+verify	Run actions/setup-python@v5	2026-10-23T02:46:58.0924370Z   DATABASE_URL: ***127.0.0.1:5432/stepwise
+verify	Run actions/setup-python@v5	2026-10-23T02:46:58.0924642Z ##[endgroup]
+verify	Run actions/setup-python@v5	2026-10-23T02:46:58.2525336Z ##[group]Installed versions
+verify	Run actions/setup-python@v5	2026-10-23T02:46:58.2678337Z (node:2757) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+verify	Run actions/setup-python@v5	2026-10-23T02:46:58.2679561Z (Use `node --trace-deprecation ...` to show where the warning was created)
+verify	Run actions/setup-python@v5	2026-10-23T02:46:58.2680621Z Successfully set up CPython (3.13.16)
+verify	Run actions/setup-python@v5	2026-10-23T02:46:58.2681533Z ##[endgroup]
+verify	Run actions/setup-node@v4	﻿2026-10-23T02:46:58.2826728Z ##[group]Run actions/setup-node@v4
+verify	Run actions/setup-node@v4	2026-10-23T02:46:58.2827031Z with:
+verify	Run actions/setup-node@v4	2026-10-23T02:46:58.2827226Z   node-version: 22
+verify	Run actions/setup-node@v4	2026-10-23T02:46:58.2827432Z   always-auth: false
+verify	Run actions/setup-node@v4	2026-10-23T02:46:58.2827646Z   check-latest: false
+verify	Run actions/setup-node@v4	2026-10-23T02:46:58.2830208Z   token: ***
+verify	Run actions/setup-node@v4	2026-10-23T02:46:58.2830733Z env:
+verify	Run actions/setup-node@v4	2026-10-23T02:46:58.2831238Z   DATABASE_URL: ***127.0.0.1:5432/stepwise
+verify	Run actions/setup-node@v4	2026-10-23T02:46:58.2831602Z   pythonLocation: /opt/hostedtoolcache/Python/3.13.16/x64
+verify	Run actions/setup-node@v4	2026-10-23T02:46:58.2832073Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.13.16/x64/lib/pkgconfig
+verify	Run actions/setup-node@v4	2026-10-23T02:46:58.2832517Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.16/x64
+verify	Run actions/setup-node@v4	2026-10-23T02:46:58.2832920Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.16/x64
+verify	Run actions/setup-node@v4	2026-10-23T02:46:58.2833312Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.16/x64
+verify	Run actions/setup-node@v4	2026-10-23T02:46:58.2833699Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.13.16/x64/lib
+verify	Run actions/setup-node@v4	2026-10-23T02:46:58.2834024Z ##[endgroup]
+verify	Run actions/setup-node@v4	2026-10-23T02:46:58.4344849Z Found in cache @ /opt/hostedtoolcache/node/22.23.3/x64
+verify	Run actions/setup-node@v4	2026-10-23T02:46:58.4349612Z (node:2766) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+verify	Run actions/setup-node@v4	2026-10-23T02:46:58.4350663Z (Use `node --trace-deprecation ...` to show where the warning was created)
+verify	Run actions/setup-node@v4	2026-10-23T02:46:58.4353171Z ##[group]Environment details
+verify	Run actions/setup-node@v4	2026-10-23T02:46:58.8482662Z node: v22.23.3
+verify	Run actions/setup-node@v4	2026-10-23T02:46:58.8483167Z npm: 10.9.9
+verify	Run actions/setup-node@v4	2026-10-23T02:46:58.8483515Z yarn: 1.22.22
+verify	Run actions/setup-node@v4	2026-10-23T02:46:58.8484324Z ##[endgroup]
+verify	Run make setup build lint test	﻿2026-10-23T02:46:58.8653873Z ##[group]Run make setup build lint test
+verify	Run make setup build lint test	2026-10-23T02:46:58.8654271Z ^[[36;1mmake setup build lint test^[[0m
+verify	Run make setup build lint test	2026-10-23T02:46:58.8863930Z shell: /usr/bin/bash -e {0}
+verify	Run make setup build lint test	2026-10-23T02:46:58.8864245Z env:
+verify	Run make setup build lint test	2026-10-23T02:46:58.8864768Z   DATABASE_URL: ***127.0.0.1:5432/stepwise
+verify	Run make setup build lint test	2026-10-23T02:46:58.8865180Z   pythonLocation: /opt/hostedtoolcache/Python/3.13.16/x64
+verify	Run make setup build lint test	2026-10-23T02:46:58.8865710Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.13.16/x64/lib/pkgconfig
+verify	Run make setup build lint test	2026-10-23T02:46:58.8866246Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.16/x64
+verify	Run make setup build lint test	2026-10-23T02:46:58.8866699Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.16/x64
+verify	Run make setup build lint test	2026-10-23T02:46:58.8867151Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.16/x64
+verify	Run make setup build lint test	2026-10-23T02:46:58.8867609Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.13.16/x64/lib
+verify	Run make setup build lint test	2026-10-23T02:46:58.8867996Z ##[endgroup]
+verify	Run make setup build lint test	2026-10-23T02:46:58.9008723Z python3 -m venv .venv
+verify	Run make setup build lint test	2026-10-23T02:47:01.8965154Z .venv/bin/python -m pip install -e . -r requirements-dev.txt
+verify	Run make setup build lint test	2026-10-23T02:47:02.3311665Z Obtaining file:///home/runner/work/stepwise/stepwise
+verify	Run make setup build lint test	2026-10-23T02:47:02.3326023Z   Installing build dependencies: started
+verify	Run make setup build lint test	2026-10-23T02:47:03.4695111Z   Installing build dependencies: finished with status 'done'
+verify	Run make setup build lint test	2026-10-23T02:47:03.4700209Z   Checking if build backend supports build_editable: started
+verify	Run make setup build lint test	2026-10-23T02:47:03.8038133Z   Checking if build backend supports build_editable: finished with status 'done'
+verify	Run make setup build lint test	2026-10-23T02:47:03.8044964Z   Getting requirements to build editable: started
+verify	Run make setup build lint test	2026-10-23T02:47:04.1405909Z   Getting requirements to build editable: finished with status 'done'
+verify	Run make setup build lint test	2026-10-23T02:47:04.1412841Z   Preparing editable metadata (pyproject.toml): started
+verify	Run make setup build lint test	2026-10-23T02:47:04.3395795Z   Preparing editable metadata (pyproject.toml): finished with status 'done'
+verify	Run make setup build lint test	2026-10-23T02:47:04.3621826Z Collecting pip==26.2.2 (from -r requirements-dev.txt (line 1))
+verify	Run make setup build lint test	2026-10-23T02:47:04.4421246Z   Downloading pip-26.2.2-py3-none-any.whl.metadata (4.6 kB)
+verify	Run make setup build lint test	2026-10-23T02:47:04.6505120Z Collecting pytest==9.1.1 (from -r requirements-dev.txt (line 2))
+verify	Run make setup build lint test	2026-10-23T02:47:04.6719453Z   Downloading pytest-9.1.1-py3-none-any.whl.metadata (7.6 kB)
+verify	Run make setup build lint test	2026-10-23T02:47:05.1524051Z Collecting ruff==0.17.1 (from -r requirements-dev.txt (line 3))
+verify	Run make setup build lint test	2026-10-23T02:47:05.1740242Z   Downloading ruff-0.17.1-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (20 kB)
+verify	Run make setup build lint test	2026-10-23T02:47:05.2362626Z Collecting pip-audit==2.9.0 (from -r requirements-dev.txt (line 4))
+verify	Run make setup build lint test	2026-10-23T02:47:05.2571122Z   Downloading pip_audit-2.9.0-py3-none-any.whl.metadata (27 kB)
+verify	Run make setup build lint test	2026-10-23T02:47:05.3236510Z Collecting psycopg==3.3.6 (from psycopg[binary]==3.3.6->stepwise-debugger==0.1.0)
+verify	Run make setup build lint test	2026-10-23T02:47:05.3445714Z   Downloading psycopg-3.3.6-py3-none-any.whl.metadata (4.4 kB)
+verify	Run make setup build lint test	2026-10-23T02:47:05.4001935Z Collecting iniconfig>=1.0.1 (from pytest==9.1.1->-r requirements-dev.txt (line 2))
+verify	Run make setup build lint test	2026-10-23T02:47:05.4214631Z   Downloading iniconfig-2.3.1-py3-none-any.whl.metadata (2.8 kB)
+verify	Run make setup build lint test	2026-10-23T02:47:05.4781997Z Collecting packaging>=22 (from pytest==9.1.1->-r requirements-dev.txt (line 2))
+verify	Run make setup build lint test	2026-10-23T02:47:05.4994202Z   Downloading packaging-26.3-py3-none-any.whl.metadata (3.5 kB)
+verify	Run make setup build lint test	2026-10-23T02:47:05.5556707Z Collecting pluggy<2,>=1.5 (from pytest==9.1.1->-r requirements-dev.txt (line 2))
+verify	Run make setup build lint test	2026-10-23T02:47:05.5770047Z   Downloading pluggy-1.7.0-py3-none-any.whl.metadata (5.0 kB)
+verify	Run make setup build lint test	2026-10-23T02:47:05.6359083Z Collecting pygments>=2.7.2 (from pytest==9.1.1->-r requirements-dev.txt (line 2))
+verify	Run make setup build lint test	2026-10-23T02:47:05.6574756Z   Downloading pygments-2.21.0-py3-none-any.whl.metadata (2.5 kB)
+verify	Run make setup build lint test	2026-10-23T02:47:05.7146608Z Collecting CacheControl>=0.13.0 (from CacheControl[filecache]>=0.13.0->pip-audit==2.9.0->-r requirements-dev.txt (line 4))
+verify	Run make setup build lint test	2026-10-23T02:47:05.7366865Z   Downloading cachecontrol-0.14.4-py3-none-any.whl.metadata (3.1 kB)
+verify	Run make setup build lint test	2026-10-23T02:47:05.8107982Z Collecting cyclonedx-python-lib<10,>=5 (from pip-audit==2.9.0->-r requirements-dev.txt (line 4))
+verify	Run make setup build lint test	2026-10-23T02:47:05.8322973Z   Downloading cyclonedx_python_lib-9.1.0-py3-none-any.whl.metadata (6.5 kB)
+verify	Run make setup build lint test	2026-10-23T02:47:05.8904243Z Collecting pip-api>=0.0.28 (from pip-audit==2.9.0->-r requirements-dev.txt (line 4))
+verify	Run make setup build lint test	2026-10-23T02:47:05.9119432Z   Downloading pip_api-0.0.35-py3-none-any.whl.metadata (17 kB)
+verify	Run make setup build lint test	2026-10-23T02:47:05.9704156Z Collecting pip-requirements-parser>=32.0.0 (from pip-audit==2.9.0->-r requirements-dev.txt (line 4))
+verify	Run make setup build lint test	2026-10-23T02:47:05.9896315Z   Downloading pip_requirements_parser-32.0.1-py3-none-any.whl.metadata (9.3 kB)
+verify	Run make setup build lint test	2026-10-23T02:47:06.0527124Z Collecting requests>=2.31.0 (from pip-audit==2.9.0->-r requirements-dev.txt (line 4))
+verify	Run make setup build lint test	2026-10-23T02:47:06.0741918Z   Downloading requests-2.34.2-py3-none-any.whl.metadata (4.8 kB)
+verify	Run make setup build lint test	2026-10-23T02:47:06.1474998Z Collecting rich>=12.4 (from pip-audit==2.9.0->-r requirements-dev.txt (line 4))
+verify	Run make setup build lint test	2026-10-23T02:47:06.1696870Z   Downloading rich-15.0.0-py3-none-any.whl.metadata (18 kB)
+verify	Run make setup build lint test	2026-10-23T02:47:06.2241040Z Collecting toml>=0.10 (from pip-audit==2.9.0->-r requirements-dev.txt (line 4))
+verify	Run make setup build lint test	2026-10-23T02:47:06.2459659Z   Downloading toml-0.10.2-py2.py3-none-any.whl.metadata (7.1 kB)
+verify	Run make setup build lint test	2026-10-23T02:47:06.3079725Z Collecting platformdirs>=4.2.0 (from pip-audit==2.9.0->-r requirements-dev.txt (line 4))
+verify	Run make setup build lint test	2026-10-23T02:47:06.3294150Z   Downloading platformdirs-4.13.5-py3-none-any.whl.metadata (5.5 kB)
+verify	Run make setup build lint test	2026-10-23T02:47:06.5213129Z Collecting psycopg-binary==3.3.6 (from psycopg[binary]==3.3.6->stepwise-debugger==0.1.0)
+verify	Run make setup build lint test	2026-10-23T02:47:06.5444793Z   Downloading psycopg_binary-3.3.6-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (2.7 kB)
+verify	Run make setup build lint test	2026-10-23T02:47:06.6030057Z Collecting license-expression<31,>=30 (from cyclonedx-python-lib<10,>=5->pip-audit==2.9.0->-r requirements-dev.txt (line 4))
+verify	Run make setup build lint test	2026-10-23T02:47:06.6246543Z   Downloading license_expression-30.4.4-py3-none-any.whl.metadata (11 kB)
+verify	Run make setup build lint test	2026-10-23T02:47:06.6842008Z Collecting packageurl-python<2,>=0.11 (from cyclonedx-python-lib<10,>=5->pip-audit==2.9.0->-r requirements-dev.txt (line 4))
+verify	Run make setup build lint test	2026-10-23T02:47:06.7053060Z   Downloading packageurl_python-0.17.6-py3-none-any.whl.metadata (5.1 kB)
+verify	Run make setup build lint test	2026-10-23T02:47:06.7630018Z Collecting py-serializable<3.0.0,>=2.0.0 (from cyclonedx-python-lib<10,>=5->pip-audit==2.9.0->-r requirements-dev.txt (line 4))
+verify	Run make setup build lint test	2026-10-23T02:47:06.7841902Z   Downloading py_serializable-2.1.0-py3-none-any.whl.metadata (4.3 kB)
+verify	Run make setup build lint test	2026-10-23T02:47:06.8383187Z Collecting sortedcontainers<3.0.0,>=2.4.0 (from cyclonedx-python-lib<10,>=5->pip-audit==2.9.0->-r requirements-dev.txt (line 4))
+verify	Run make setup build lint test	2026-10-23T02:47:06.8595551Z   Downloading sortedcontainers-2.4.0-py2.py3-none-any.whl.metadata (10 kB)
+verify	Run make setup build lint test	2026-10-23T02:47:06.9158994Z Collecting boolean.py>=4.0 (from license-expression<31,>=30->cyclonedx-python-lib<10,>=5->pip-audit==2.9.0->-r requirements-dev.txt (line 4))
+verify	Run make setup build lint test	2026-10-23T02:47:06.9369077Z   Downloading boolean_py-5.0-py3-none-any.whl.metadata (2.3 kB)
+verify	Run make setup build lint test	2026-10-23T02:47:06.9915451Z Collecting defusedxml<0.8.0,>=0.7.1 (from py-serializable<3.0.0,>=2.0.0->cyclonedx-python-lib<10,>=5->pip-audit==2.9.0->-r requirements-dev.txt (line 4))
+verify	Run make setup build lint test	2026-10-23T02:47:07.0125538Z   Downloading defusedxml-0.7.1-py2.py3-none-any.whl.metadata (32 kB)
+verify	Run make setup build lint test	2026-10-23T02:47:07.1381150Z Collecting msgpack<2.0.0,>=0.5.2 (from CacheControl>=0.13.0->CacheControl[filecache]>=0.13.0->pip-audit==2.9.0->-r requirements-dev.txt (line 4))
+verify	Run make setup build lint test	2026-10-23T02:47:07.1594651Z   Downloading msgpack-1.2.3-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (8.3 kB)
+verify	Run make setup build lint test	2026-10-23T02:47:07.2283341Z Collecting filelock>=3.8.0 (from CacheControl[filecache]>=0.13.0->pip-audit==2.9.0->-r requirements-dev.txt (line 4))
+verify	Run make setup build lint test	2026-10-23T02:47:07.2492177Z   Downloading filelock-4.2.4-py3-none-any.whl.metadata (2.0 kB)
+verify	Run make setup build lint test	2026-10-23T02:47:07.3152373Z Collecting pyparsing (from pip-requirements-parser>=32.0.0->pip-audit==2.9.0->-r requirements-dev.txt (line 4))
+verify	Run make setup build lint test	2026-10-23T02:47:07.3360938Z   Downloading pyparsing-3.3.3-py3-none-any.whl.metadata (5.9 kB)
+verify	Run make setup build lint test	2026-10-23T02:47:07.4985483Z Collecting charset_normalizer<4,>=2 (from requests>=2.31.0->pip-audit==2.9.0->-r requirements-dev.txt (line 4))
+verify	Run make setup build lint test	2026-10-23T02:47:07.5208870Z   Downloading charset_normalizer-3.5.2-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (46 kB)
+verify	Run make setup build lint test	2026-10-23T02:47:07.5848959Z Collecting idna<4,>=2.5 (from requests>=2.31.0->pip-audit==2.9.0->-r requirements-dev.txt (line 4))
+verify	Run make setup build lint test	2026-10-23T02:47:07.6060934Z   Downloading idna-3.20-py3-none-any.whl.metadata (7.2 kB)
+verify	Run make setup build lint test	2026-10-23T02:47:07.6884677Z Collecting urllib3<3,>=1.26 (from requests>=2.31.0->pip-audit==2.9.0->-r requirements-dev.txt (line 4))
+verify	Run make setup build lint test	2026-10-23T02:47:07.7103276Z   Downloading urllib3-2.8.0-py3-none-any.whl.metadata (7.4 kB)
+verify	Run make setup build lint test	2026-10-23T02:47:07.7784264Z Collecting certifi>=2023.5.7 (from requests>=2.31.0->pip-audit==2.9.0->-r requirements-dev.txt (line 4))
+verify	Run make setup build lint test	2026-10-23T02:47:07.8029237Z   Downloading certifi-2026.10.19-py3-none-any.whl.metadata (2.5 kB)
+verify	Run make setup build lint test	2026-10-23T02:47:07.8661958Z Collecting markdown-it-py>=2.2.0 (from rich>=12.4->pip-audit==2.9.0->-r requirements-dev.txt (line 4))
+verify	Run make setup build lint test	2026-10-23T02:47:07.8883701Z   Downloading markdown_it_py-4.2.0-py3-none-any.whl.metadata (7.4 kB)
+verify	Run make setup build lint test	2026-10-23T02:47:07.9465328Z Collecting mdurl~=0.1 (from markdown-it-py>=2.2.0->rich>=12.4->pip-audit==2.9.0->-r requirements-dev.txt (line 4))
+verify	Run make setup build lint test	2026-10-23T02:47:07.9680262Z   Downloading mdurl-0.1.2-py3-none-any.whl.metadata (1.6 kB)
+verify	Run make setup build lint test	2026-10-23T02:47:07.9953526Z Downloading pip-26.2.2-py3-none-any.whl (1.8 MB)
+verify	Run make setup build lint test	2026-10-23T02:47:08.0863912Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.8/1.8 MB 26.1 MB/s  0:00:00
+verify	Run make setup build lint test	2026-10-23T02:47:08.1079601Z Downloading pytest-9.1.1-py3-none-any.whl (386 kB)
+verify	Run make setup build lint test	2026-10-23T02:47:08.1343248Z Downloading ruff-0.17.1-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (10.4 MB)
+verify	Run make setup build lint test	2026-10-23T02:47:08.2032320Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 10.4/10.4 MB 152.5 MB/s  0:00:00
+verify	Run make setup build lint test	2026-10-23T02:47:08.2268862Z Downloading pip_audit-2.9.0-py3-none-any.whl (58 kB)
+verify	Run make setup build lint test	2026-10-23T02:47:08.2517261Z Downloading psycopg-3.3.6-py3-none-any.whl (215 kB)
+verify	Run make setup build lint test	2026-10-23T02:47:08.2798411Z Downloading psycopg_binary-3.3.6-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (5.2 MB)
+verify	Run make setup build lint test	2026-10-23T02:47:08.4666792Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.2/5.2 MB 27.0 MB/s  0:00:00
+verify	Run make setup build lint test	2026-10-23T02:47:08.4876796Z Downloading cyclonedx_python_lib-9.1.0-py3-none-any.whl (374 kB)
+verify	Run make setup build lint test	2026-10-23T02:47:08.5128950Z Downloading license_expression-30.4.4-py3-none-any.whl (120 kB)
+verify	Run make setup build lint test	2026-10-23T02:47:08.5362751Z Downloading packageurl_python-0.17.6-py3-none-any.whl (36 kB)
+verify	Run make setup build lint test	2026-10-23T02:47:08.5601102Z Downloading pluggy-1.7.0-py3-none-any.whl (27 kB)
+verify	Run make setup build lint test	2026-10-23T02:47:08.5839552Z Downloading py_serializable-2.1.0-py3-none-any.whl (23 kB)
+verify	Run make setup build lint test	2026-10-23T02:47:08.6076660Z Downloading defusedxml-0.7.1-py2.py3-none-any.whl (25 kB)
+verify	Run make setup build lint test	2026-10-23T02:47:08.6314200Z Downloading sortedcontainers-2.4.0-py2.py3-none-any.whl (29 kB)
+verify	Run make setup build lint test	2026-10-23T02:47:08.6550306Z Downloading boolean_py-5.0-py3-none-any.whl (26 kB)
+verify	Run make setup build lint test	2026-10-23T02:47:08.6785726Z Downloading cachecontrol-0.14.4-py3-none-any.whl (22 kB)
+verify	Run make setup build lint test	2026-10-23T02:47:08.7022224Z Downloading msgpack-1.2.3-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (466 kB)
+verify	Run make setup build lint test	2026-10-23T02:47:08.7262159Z Downloading filelock-4.2.4-py3-none-any.whl (162 kB)
+verify	Run make setup build lint test	2026-10-23T02:47:08.7520136Z Downloading iniconfig-2.3.1-py3-none-any.whl (7.6 kB)
+verify	Run make setup build lint test	2026-10-23T02:47:08.7749065Z Downloading packaging-26.3-py3-none-any.whl (129 kB)
+verify	Run make setup build lint test	2026-10-23T02:47:08.7993748Z Downloading pip_api-0.0.35-py3-none-any.whl (123 kB)
+verify	Run make setup build lint test	2026-10-23T02:47:08.8231847Z Downloading pip_requirements_parser-32.0.1-py3-none-any.whl (35 kB)
+verify	Run make setup build lint test	2026-10-23T02:47:08.8476002Z Downloading platformdirs-4.13.5-py3-none-any.whl (32 kB)
+verify	Run make setup build lint test	2026-10-23T02:47:08.8727110Z Downloading pygments-2.21.0-py3-none-any.whl (1.3 MB)
+verify	Run make setup build lint test	2026-10-23T02:47:08.8846866Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.3/1.3 MB 120.8 MB/s  0:00:00
+verify	Run make setup build lint test	2026-10-23T02:47:08.9059004Z Downloading requests-2.34.2-py3-none-any.whl (73 kB)
+verify	Run make setup build lint test	2026-10-23T02:47:08.9298782Z Downloading charset_normalizer-3.5.2-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (254 kB)
+verify	Run make setup build lint test	2026-10-23T02:47:08.9540561Z Downloading idna-3.20-py3-none-any.whl (69 kB)
+verify	Run make setup build lint test	2026-10-23T02:47:08.9773564Z Downloading urllib3-2.8.0-py3-none-any.whl (135 kB)
+verify	Run make setup build lint test	2026-10-23T02:47:09.0009356Z Downloading certifi-2026.10.19-py3-none-any.whl (136 kB)
+verify	Run make setup build lint test	2026-10-23T02:47:09.0243078Z Downloading rich-15.0.0-py3-none-any.whl (310 kB)
+verify	Run make setup build lint test	2026-10-23T02:47:09.0507268Z Downloading markdown_it_py-4.2.0-py3-none-any.whl (91 kB)
+verify	Run make setup build lint test	2026-10-23T02:47:09.0747785Z Downloading mdurl-0.1.2-py3-none-any.whl (10.0 kB)
+verify	Run make setup build lint test	2026-10-23T02:47:09.0983804Z Downloading toml-0.10.2-py2.py3-none-any.whl (16 kB)
+verify	Run make setup build lint test	2026-10-23T02:47:09.1213079Z Downloading pyparsing-3.3.3-py3-none-any.whl (126 kB)
+verify	Run make setup build lint test	2026-10-23T02:47:09.2266343Z Building wheels for collected packages: stepwise-debugger
+verify	Run make setup build lint test	2026-10-23T02:47:09.2272622Z   Building editable for stepwise-debugger (pyproject.toml): started
+verify	Run make setup build lint test	2026-10-23T02:47:09.4477416Z   Building editable for stepwise-debugger (pyproject.toml): finished with status 'done'
+verify	Run make setup build lint test	2026-10-23T02:47:09.4484030Z   Created wheel for stepwise-debugger: filename=stepwise_debugger-0.1.0-0.editable-py3-none-any.whl size=1323 sha256=1d8dd5f2b3205a355742e8217b7a42a0ae74c3afcb38038902217d5d4f0a807d
+verify	Run make setup build lint test	2026-10-23T02:47:09.4485661Z   Stored in directory: /tmp/pip-ephem-wheel-cache-6zafukc3/wheels/fe/dd/ef/a2aad079c5163000eb4aa655337b1a049c7e2584cb4eae91a1
+verify	Run make setup build lint test	2026-10-23T02:47:09.4499970Z Successfully built stepwise-debugger
+verify	Run make setup build lint test	2026-10-23T02:47:09.5198560Z Installing collected packages: sortedcontainers, boolean.py, urllib3, toml, ruff, pyparsing, pygments, psycopg-binary, psycopg, pluggy, platformdirs, pip, packaging, packageurl-python, msgpack, mdurl, license-expression, iniconfig, idna, filelock, defusedxml, charset_normalizer, certifi, requests, pytest, py-serializable, pip-requirements-parser, pip-api, markdown-it-py, stepwise-debugger, rich, cyclonedx-python-lib, CacheControl, pip-audit
+verify	Run make setup build lint test	2026-10-23T02:47:10.8984224Z   Attempting uninstall: pip
+verify	Run make setup build lint test	2026-10-23T02:47:10.9014711Z     Found existing installation: pip 26.2.1
+verify	Run make setup build lint test	2026-10-23T02:47:10.9355354Z     Uninstalling pip-26.2.1:
+verify	Run make setup build lint test	2026-10-23T02:47:10.9418560Z       Successfully uninstalled pip-26.2.1
+verify	Run make setup build lint test	2026-10-23T02:47:13.1115587Z 
+verify	Run make setup build lint test	2026-10-23T02:47:13.1159261Z Successfully installed CacheControl-0.14.4 boolean.py-5.0 certifi-2026.10.19 charset_normalizer-3.5.2 cyclonedx-python-lib-9.1.0 defusedxml-0.7.1 filelock-4.2.4 idna-3.20 iniconfig-2.3.1 license-expression-30.4.4 markdown-it-py-4.2.0 mdurl-0.1.2 msgpack-1.2.3 packageurl-python-0.17.6 packaging-26.3 pip-26.2.2 pip-api-0.0.35 pip-audit-2.9.0 pip-requirements-parser-32.0.1 platformdirs-4.13.5 pluggy-1.7.0 psycopg-3.3.6 psycopg-binary-3.3.6 py-serializable-2.1.0 pygments-2.21.0 pyparsing-3.3.3 pytest-9.1.1 requests-2.34.2 rich-15.0.0 ruff-0.17.1 sortedcontainers-2.4.0 stepwise-debugger-0.1.0 toml-0.10.2 urllib3-2.8.0
+verify	Run make setup build lint test	2026-10-23T02:47:13.1166074Z 
+verify	Run make setup build lint test	2026-10-23T02:47:13.1166573Z [notice] A new release of pip is available: 26.2.1 -> 26.2.2
+verify	Run make setup build lint test	2026-10-23T02:47:13.1167597Z [notice] To update, run: /home/runner/work/stepwise/stepwise/.venv/bin/python -m pip install --upgrade pip
+verify	Run make setup build lint test	2026-10-23T02:47:13.2186628Z npm --prefix apps/web ci
+verify	Run make setup build lint test	2026-10-23T02:47:14.7235588Z 
+verify	Run make setup build lint test	2026-10-23T02:47:14.7236576Z added 23 packages, and audited 24 packages in 1s
+verify	Run make setup build lint test	2026-10-23T02:47:14.7237119Z 
+verify	Run make setup build lint test	2026-10-23T02:47:14.7237363Z 6 packages are looking for funding
+verify	Run make setup build lint test	2026-10-23T02:47:14.7237811Z   run `npm fund` for details
+verify	Run make setup build lint test	2026-10-23T02:47:14.7246105Z 
+verify	Run make setup build lint test	2026-10-23T02:47:14.7251519Z found 0 vulnerabilities
+verify	Run make setup build lint test	2026-10-23T02:47:14.7475142Z npm --prefix apps/web run build
+verify	Run make setup build lint test	2026-10-23T02:47:14.8438045Z 
+verify	Run make setup build lint test	2026-10-23T02:47:14.8438715Z > stepwise-edit-room@0.1.0 build
+verify	Run make setup build lint test	2026-10-23T02:47:14.8439567Z > tsc --noEmit && vite build
+verify	Run make setup build lint test	2026-10-23T02:47:14.8439807Z 
+verify	Run make setup build lint test	2026-10-23T02:47:16.2778447Z ^[[36mvite v6.4.4 ^[[32mbuilding for production...^[[36m^[[39m
+verify	Run make setup build lint test	2026-10-23T02:47:16.3555534Z transforming...
+verify	Run make setup build lint test	2026-10-23T02:47:17.1321901Z ^[[32m✓^[[39m 28 modules transformed.
+verify	Run make setup build lint test	2026-10-23T02:47:17.2572444Z rendering chunks...
+verify	Run make setup build lint test	2026-10-23T02:47:17.2637608Z computing gzip size...
+verify	Run make setup build lint test	2026-10-23T02:47:17.2733319Z ^[[2mdist/^[[22m^[[32mindex.html                 ^[[39m^[[1m^[[2m  0.41 kB^[[22m^[[1m^[[22m^[[2m │ gzip:  0.29 kB^[[22m
+verify	Run make setup build lint test	2026-10-23T02:47:17.2735109Z ^[[2mdist/^[[22m^[[2massets/^[[22m^[[35mindex-BQnipaaT.css  ^[[39m^[[1m^[[2m  8.19 kB^[[22m^[[1m^[[22m^[[2m │ gzip:  2.41 kB^[[22m
+verify	Run make setup build lint test	2026-10-23T02:47:17.2737364Z ^[[2mdist/^[[22m^[[2massets/^[[22m^[[36mindex-DGEQaNZl.js   ^[[39m^[[1m^[[2m204.57 kB^[[22m^[[1m^[[22m^[[2m │ gzip: 64.23 kB^[[22m
+verify	Run make setup build lint test	2026-10-23T02:47:17.2738518Z ^[[32m✓ built in 970ms^[[39m
+verify	Run make setup build lint test	2026-10-23T02:47:17.3027256Z .venv/bin/ruff check src tests scripts
+verify	Run make setup build lint test	2026-10-23T02:47:17.3120912Z All checks passed!
+verify	Run make setup build lint test	2026-10-23T02:47:17.3121549Z .venv/bin/ruff format --check src tests scripts
+verify	Run make setup build lint test	2026-10-23T02:47:17.3205388Z 13 files already formatted
+verify	Run make setup build lint test	2026-10-23T02:47:17.3211873Z npm --prefix apps/web run lint
+verify	Run make setup build lint test	2026-10-23T02:47:17.4168925Z 
+verify	Run make setup build lint test	2026-10-23T02:47:17.4169907Z > stepwise-edit-room@0.1.0 lint
+verify	Run make setup build lint test	2026-10-23T02:47:17.4170916Z > tsc --noEmit && prettier --check src
+verify	Run make setup build lint test	2026-10-23T02:47:17.4171239Z 
+verify	Run make setup build lint test	2026-10-23T02:47:18.7163017Z Checking formatting...
+verify	Run make setup build lint test	2026-10-23T02:47:19.1171986Z All matched files use Prettier code style!
+verify	Run make setup build lint test	2026-10-23T02:47:19.1526441Z node --check sdk/node/index.mjs
+verify	Run make setup build lint test	2026-10-23T02:47:19.1768512Z .venv/bin/python scripts/local.py test
+verify	Run make setup build lint test	2026-10-23T02:47:22.5455164Z ............                                                             [100%]
+verify	Run make setup build lint test	2026-10-23T02:47:22.5455845Z 12 passed in 3.02s
+verify	Run .venv/bin/pip-audit --skip-editable	﻿2026-10-23T02:47:22.6029908Z ##[group]Run .venv/bin/pip-audit --skip-editable
+verify	Run .venv/bin/pip-audit --skip-editable	2026-10-23T02:47:22.6030627Z ^[[36;1m.venv/bin/pip-audit --skip-editable^[[0m
+verify	Run .venv/bin/pip-audit --skip-editable	2026-10-23T02:47:22.6094729Z shell: /usr/bin/bash -e {0}
+verify	Run .venv/bin/pip-audit --skip-editable	2026-10-23T02:47:22.6095028Z env:
+verify	Run .venv/bin/pip-audit --skip-editable	2026-10-23T02:47:22.6095613Z   DATABASE_URL: ***127.0.0.1:5432/stepwise
+verify	Run .venv/bin/pip-audit --skip-editable	2026-10-23T02:47:22.6096047Z   pythonLocation: /opt/hostedtoolcache/Python/3.13.16/x64
+verify	Run .venv/bin/pip-audit --skip-editable	2026-10-23T02:47:22.6096559Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.13.16/x64/lib/pkgconfig
+verify	Run .venv/bin/pip-audit --skip-editable	2026-10-23T02:47:22.6097063Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.16/x64
+verify	Run .venv/bin/pip-audit --skip-editable	2026-10-23T02:47:22.6097516Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.16/x64
+verify	Run .venv/bin/pip-audit --skip-editable	2026-10-23T02:47:22.6097980Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.16/x64
+verify	Run .venv/bin/pip-audit --skip-editable	2026-10-23T02:47:22.6098438Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.13.16/x64/lib
+verify	Run .venv/bin/pip-audit --skip-editable	2026-10-23T02:47:22.6098829Z ##[endgroup]
+verify	Run .venv/bin/pip-audit --skip-editable	2026-10-23T02:47:25.3515255Z No known vulnerabilities found
+verify	Run .venv/bin/pip-audit --skip-editable	2026-10-23T02:47:25.3524803Z Name              Skip Reason
+verify	Run .venv/bin/pip-audit --skip-editable	2026-10-23T02:47:25.3525537Z ----------------- -------------------------------
+verify	Run .venv/bin/pip-audit --skip-editable	2026-10-23T02:47:25.3526167Z stepwise-debugger distribution marked as editable
+verify	Run npm --prefix apps/web audit --audit-level=high	﻿2026-10-23T02:47:25.3966161Z ##[group]Run npm --prefix apps/web audit --audit-level=high
+verify	Run npm --prefix apps/web audit --audit-level=high	2026-10-23T02:47:25.3966639Z ^[[36;1mnpm --prefix apps/web audit --audit-level=high^[[0m
+verify	Run npm --prefix apps/web audit --audit-level=high	2026-10-23T02:47:25.4027657Z shell: /usr/bin/bash -e {0}
+verify	Run npm --prefix apps/web audit --audit-level=high	2026-10-23T02:47:25.4027931Z env:
+verify	Run npm --prefix apps/web audit --audit-level=high	2026-10-23T02:47:25.4028626Z   DATABASE_URL: ***127.0.0.1:5432/stepwise
+verify	Run npm --prefix apps/web audit --audit-level=high	2026-10-23T02:47:25.4029012Z   pythonLocation: /opt/hostedtoolcache/Python/3.13.16/x64
+verify	Run npm --prefix apps/web audit --audit-level=high	2026-10-23T02:47:25.4029478Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.13.16/x64/lib/pkgconfig
+verify	Run npm --prefix apps/web audit --audit-level=high	2026-10-23T02:47:25.4029950Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.16/x64
+verify	Run npm --prefix apps/web audit --audit-level=high	2026-10-23T02:47:25.4030659Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.16/x64
+verify	Run npm --prefix apps/web audit --audit-level=high	2026-10-23T02:47:25.4031105Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.16/x64
+verify	Run npm --prefix apps/web audit --audit-level=high	2026-10-23T02:47:25.4031541Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.13.16/x64/lib
+verify	Run npm --prefix apps/web audit --audit-level=high	2026-10-23T02:47:25.4031896Z ##[endgroup]
+verify	Run npm --prefix apps/web audit --audit-level=high	2026-10-23T02:47:25.7496387Z found 0 vulnerabilities
+verify	Run docker build -t stepwise:test .	﻿2026-10-23T02:47:25.7634034Z ##[group]Run docker build -t stepwise:test .
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:25.7634680Z ^[[36;1mdocker build -t stepwise:test .^[[0m
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:25.7720504Z shell: /usr/bin/bash -e {0}
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:25.7720897Z env:
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:25.7721557Z   DATABASE_URL: ***127.0.0.1:5432/stepwise
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:25.7722061Z   pythonLocation: /opt/hostedtoolcache/Python/3.13.16/x64
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:25.7722686Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.13.16/x64/lib/pkgconfig
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:25.7723293Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.16/x64
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:25.7723832Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.16/x64
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:25.7724371Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.16/x64
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:25.7724931Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.13.16/x64/lib
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:25.7725390Z ##[endgroup]
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:26.3689915Z #0 building with "default" instance using docker driver
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:26.3690785Z 
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:26.3691280Z #1 [internal] load build definition from Dockerfile
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:26.3692187Z #1 transferring dockerfile: 496B done
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:26.3692790Z #1 DONE 0.0s
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:26.3693029Z 
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:26.3693691Z #2 [internal] load metadata for docker.io/library/python:3.13-slim-bookworm
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:26.5816006Z #2 ...
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:26.5816220Z 
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:26.5816578Z #3 [auth] library/python:pull token for registry-1.docker.io
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:26.5817027Z #3 DONE 0.0s
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:26.5817183Z 
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:26.5817469Z #4 [auth] library/node:pull token for registry-1.docker.io
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:26.5817887Z #4 DONE 0.0s
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:26.7318706Z 
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:26.7319450Z #5 [internal] load metadata for docker.io/library/node:22-bookworm-slim
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:27.0362134Z #5 ...
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:27.0362950Z 
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:27.0363723Z #2 [internal] load metadata for docker.io/library/python:3.13-slim-bookworm
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:27.0364443Z #2 DONE 0.8s
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:27.1493427Z 
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:27.1494975Z #5 [internal] load metadata for docker.io/library/node:22-bookworm-slim
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:27.1495745Z #5 DONE 0.8s
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:27.1496002Z 
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:27.1496332Z #6 [internal] load .dockerignore
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:27.1496944Z #6 transferring context: 95B done
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:27.1497409Z #6 DONE 0.0s
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:27.1497639Z 
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:27.1497913Z #7 [internal] load build context
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:27.1498507Z #7 transferring context: 130.95kB done
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:27.1498996Z #7 DONE 0.0s
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:27.1499203Z 
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:27.1500276Z #8 [stage-1 1/6] FROM docker.io/library/python:3.13-slim-bookworm@sha256:e32be0e55814a08977501ca863271d9bd02443710db8f2afaf8372e2c4508530
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:27.1502583Z #8 resolve docker.io/library/python:3.13-slim-bookworm@sha256:e32be0e55814a08977501ca863271d9bd02443710db8f2afaf8372e2c4508530 0.0s done
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:27.1503680Z #8 DONE 0.1s
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:27.1503902Z 
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:27.1504829Z #9 [web 1/6] FROM docker.io/library/node:22-bookworm-slim@sha256:de170b39439eb0e5a3444ad7d60b015614a381e10fecae2e30ec9e735122f38d
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:27.1506287Z #9 resolve docker.io/library/node:22-bookworm-slim@sha256:de170b39439eb0e5a3444ad7d60b015614a381e10fecae2e30ec9e735122f38d 0.0s done
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:27.3085752Z #9 sha256:9d58805976c12f11013d188c510c3520e3f061c1b311d4905afe5865aa496e63 449B / 449B 0.1s done
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:27.4100256Z #9 sha256:ba8be34911c2eabcd63c9da67f2e8887ddf912df62c1223ca377ef9e9655cfba 16.78MB / 49.89MB 0.2s
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:27.4102022Z #9 sha256:696628b66b50a8ea2d374542f47107bc19fb3fd29825211da5c68b74a1b01555 1.71MB / 1.71MB 0.2s done
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:27.5146648Z #9 sha256:ba8be34911c2eabcd63c9da67f2e8887ddf912df62c1223ca377ef9e9655cfba 49.89MB / 49.89MB 0.3s done
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:27.5148541Z #9 sha256:b43ad0aedb87ae13912d52799d0d5552c146dced05197a7fa83b117cb3308906 3.31kB / 3.31kB 0.1s done
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:27.5149968Z #9 extracting sha256:b43ad0aedb87ae13912d52799d0d5552c146dced05197a7fa83b117cb3308906 0.0s done
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:27.6821950Z #9 extracting sha256:ba8be34911c2eabcd63c9da67f2e8887ddf912df62c1223ca377ef9e9655cfba
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:27.9559956Z #9 ...
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:27.9560279Z 
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:27.9561335Z #8 [stage-1 1/6] FROM docker.io/library/python:3.13-slim-bookworm@sha256:e32be0e55814a08977501ca863271d9bd02443710db8f2afaf8372e2c4508530
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:27.9562975Z #8 sha256:514f59c1209a1df965b3efaf7cc2ede57d0cbf21868236eb5c056abcb714ad41 250B / 250B 0.1s done
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:27.9564382Z #8 sha256:a6a788508a7265428337143dd4f37091356d9122dfa8c289c3242b1413916fa5 12.61MB / 12.61MB 0.2s done
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:27.9565831Z #8 sha256:70e1fe648bab453e8570a90bce0d674dfdfe9707d1b8e9e823a76d0e91d44278 3.34MB / 3.34MB 0.2s done
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:27.9567232Z #8 extracting sha256:70e1fe648bab453e8570a90bce0d674dfdfe9707d1b8e9e823a76d0e91d44278 0.1s done
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:27.9568552Z #8 extracting sha256:a6a788508a7265428337143dd4f37091356d9122dfa8c289c3242b1413916fa5 0.4s done
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:27.9569371Z #8 DONE 0.9s
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:28.1151920Z 
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:28.1155191Z #8 [stage-1 1/6] FROM docker.io/library/python:3.13-slim-bookworm@sha256:e32be0e55814a08977501ca863271d9bd02443710db8f2afaf8372e2c4508530
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:28.1157162Z #8 extracting sha256:514f59c1209a1df965b3efaf7cc2ede57d0cbf21868236eb5c056abcb714ad41 done
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:28.1158152Z #8 DONE 0.9s
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:28.1158744Z 
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:28.1159171Z #10 [stage-1 2/6] WORKDIR /app
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:28.7643163Z #10 ...
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:28.7643500Z 
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:28.7644828Z #9 [web 1/6] FROM docker.io/library/node:22-bookworm-slim@sha256:de170b39439eb0e5a3444ad7d60b015614a381e10fecae2e30ec9e735122f38d
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:28.7646594Z #9 extracting sha256:ba8be34911c2eabcd63c9da67f2e8887ddf912df62c1223ca377ef9e9655cfba 1.2s done
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:28.7647488Z #9 DONE 1.7s
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:28.8647048Z 
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:28.8647819Z #10 [stage-1 2/6] WORKDIR /app
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:28.8648323Z #10 DONE 0.8s
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:28.8648494Z 
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:28.8649217Z #9 [web 1/6] FROM docker.io/library/node:22-bookworm-slim@sha256:de170b39439eb0e5a3444ad7d60b015614a381e10fecae2e30ec9e735122f38d
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:28.8650439Z #9 extracting sha256:696628b66b50a8ea2d374542f47107bc19fb3fd29825211da5c68b74a1b01555 0.1s done
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:28.8651572Z #9 extracting sha256:9d58805976c12f11013d188c510c3520e3f061c1b311d4905afe5865aa496e63 done
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:28.8652237Z #9 DONE 1.7s
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:28.8652373Z 
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:28.8652551Z #11 [stage-1 3/6] COPY pyproject.toml ./
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:28.8653000Z #11 DONE 0.1s
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:28.8653201Z 
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:28.8653410Z #12 [web 2/6] WORKDIR /web
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:28.8653849Z #12 DONE 0.0s
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:28.8654061Z 
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:28.8654310Z #13 [stage-1 4/6] COPY src ./src
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:29.0332053Z #13 DONE 0.0s
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:29.0332390Z 
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:29.0332763Z #14 [web 3/6] COPY apps/web/package*.json ./
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:29.0333269Z #14 DONE 0.0s
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:29.0333497Z 
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:29.0333681Z #15 [web 4/6] RUN npm ci
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:30.5605455Z #15 1.678 
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:30.5607206Z #15 1.678 added 23 packages, and audited 24 packages in 1s
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:30.5607842Z #15 1.678 
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:30.7254726Z #15 1.679 6 packages are looking for funding
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:30.7256144Z #15 1.679   run `npm fund` for details
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:30.7256886Z #15 1.680 
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:30.7257539Z #15 1.680 found 0 vulnerabilities
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:30.7258253Z #15 1.681 npm notice
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:30.7259167Z #15 1.681 npm notice New major version of npm available! 10.9.9 -> 12.2.1
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:30.7260765Z #15 1.681 npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.1
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:30.7262255Z #15 1.681 npm notice To update run: npm install -g npm@12.2.1
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:30.7263083Z #15 1.681 npm notice
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:30.7263659Z #15 DONE 1.8s
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:30.7285914Z 
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:30.7287209Z #16 [stage-1 5/6] RUN pip install --no-cache-dir pip==26.2.2 . && useradd --uid 10001 --create-home app
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:30.7289318Z #16 1.736 Processing ./.
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:30.7294363Z #16 1.738   Installing build dependencies: started
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:30.9108615Z #16 ...
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:30.9108899Z 
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:30.9109184Z #17 [web 5/6] COPY apps/web/ ./
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:30.9109837Z #17 DONE 0.0s
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:31.0229830Z 
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:31.0231039Z #18 [web 6/6] RUN npm run build
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:31.0232032Z #18 0.262 
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:31.0232808Z #18 0.262 > stepwise-edit-room@0.1.0 build
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:31.0233457Z #18 0.262 > tsc --noEmit && vite build
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:31.0234163Z #18 0.262 
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:32.8122018Z #18 1.955 vite v6.4.4 building for production...
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:32.8131780Z #18 2.049 transforming...
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:33.9532222Z #18 3.189 ✓ 28 modules transformed.
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:34.1031828Z #18 3.341 rendering chunks...
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:34.3074785Z #18 3.348 computing gzip size...
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:34.3076035Z #18 3.357 dist/index.html                   0.41 kB │ gzip:  0.29 kB
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:34.3077007Z #18 3.357 dist/assets/index-BQnipaaT.css    8.19 kB │ gzip:  2.41 kB
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:34.3077932Z #18 3.357 dist/assets/index-DGEQaNZl.js   204.57 kB │ gzip: 64.23 kB
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:34.3078561Z #18 3.357 ✓ built in 1.37s
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:34.3078922Z #18 DONE 3.4s
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:34.3079110Z 
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:34.3079921Z #16 [stage-1 5/6] RUN pip install --no-cache-dir pip==26.2.2 . && useradd --uid 10001 --create-home app
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:34.3081293Z #16 3.171   Installing build dependencies: finished with status 'done'
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:34.3082455Z #16 3.172   Getting requirements to build wheel: started
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:34.3083627Z #16 3.823   Getting requirements to build wheel: finished with status 'done'
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:34.3084718Z #16 3.824   Preparing metadata (pyproject.toml): started
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:34.3085948Z #16 4.137   Preparing metadata (pyproject.toml): finished with status 'done'
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:34.3087880Z #16 4.140 Requirement already satisfied: pip==26.2.2 in /usr/local/lib/python3.13/site-packages (26.2.2)
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:34.3089849Z #16 4.390 Collecting psycopg==3.3.6 (from psycopg[binary]==3.3.6->stepwise-debugger==0.1.0)
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:34.3091203Z #16 4.551   Downloading psycopg-3.3.6-py3-none-any.whl.metadata (4.4 kB)
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:34.3092047Z #16 4.953 Collecting psycopg-binary==3.3.6 (from psycopg[binary]==3.3.6->stepwise-debugger==0.1.0)
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:34.3093136Z #16 4.975   Downloading psycopg_binary-3.3.6-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (2.7 kB)
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:34.3093978Z #16 5.000 Downloading psycopg-3.3.6-py3-none-any.whl (215 kB)
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:34.3094820Z #16 5.085 Downloading psycopg_binary-3.3.6-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (5.2 MB)
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:34.5125899Z #16 5.466    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.2/5.2 MB 14.2 MB/s  0:00:00
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:34.5127095Z #16 5.480 Building wheels for collected packages: stepwise-debugger
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:34.5128174Z #16 5.481   Building wheel for stepwise-debugger (pyproject.toml): started
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:34.5982237Z #16 5.716   Building wheel for stepwise-debugger (pyproject.toml): finished with status 'done'
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:34.7690094Z #16 5.717   Created wheel for stepwise-debugger: filename=stepwise_debugger-0.1.0-py3-none-any.whl size=10523 sha256=48b97c7c2f2ebca866e9ed50a6d7eb8f3b97e9773c04240cce24a646d9021056
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:34.7692677Z #16 5.717   Stored in directory: /tmp/pip-ephem-wheel-cache-4ibp8eeu/wheels/19/62/e5/caf0138816cbbc0c92b8fb19626cf9ac282f22194a65231821
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:34.7693902Z #16 5.719 Successfully built stepwise-debugger
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:34.7694833Z #16 5.737 Installing collected packages: psycopg-binary, psycopg, stepwise-debugger
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:34.8674110Z #16 5.986 
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:34.9867408Z #16 5.988 Successfully installed psycopg-3.3.6 psycopg-binary-3.3.6 stepwise-debugger-0.1.0
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:34.9871307Z #16 5.988 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:34.9877620Z #16 DONE 6.1s
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:35.1725617Z 
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:35.1726560Z #19 [stage-1 6/6] COPY --from=web /web/dist ./apps/web/dist
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:35.1727332Z #19 DONE 0.0s
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:35.1727624Z 
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:35.1728023Z #20 exporting to image
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:35.1728433Z #20 exporting layers
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:36.2005392Z #20 exporting layers 1.2s done
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:36.3860651Z #20 exporting manifest sha256:63e61588c92c0b08ea6665070185be1b980893bd61f9cbcc413e7c8a36aaace2 done
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:36.3862807Z #20 exporting config sha256:d799180bd6206e9dcd502adf98a7bedf5dead4a6ff8b0610a151306a48335861 done
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:36.3864703Z #20 exporting attestation manifest sha256:d8b4427a7444850043940599e4a91cbe9bf7a014304490cfcb3f4e8c98a8df86 done
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:36.3866730Z #20 exporting manifest list sha256:135687613e501aac8ad05a4da42dcc4ded9c01b5cfd6e29f51870815dd30b389 done
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:36.3867766Z #20 naming to docker.io/library/stepwise:test done
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:36.3868419Z #20 unpacking to docker.io/library/stepwise:test
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:36.5025507Z #20 unpacking to docker.io/library/stepwise:test 0.3s done
+verify	Run docker build -t stepwise:test .	2026-10-23T02:47:36.5879843Z #20 DONE 1.5s
+verify	Run .venv/bin/python scripts/container_smoke.py	﻿2026-10-23T02:47:36.5992069Z ##[group]Run .venv/bin/python scripts/container_smoke.py
+verify	Run .venv/bin/python scripts/container_smoke.py	2026-10-23T02:47:36.5992539Z ^[[36;1m.venv/bin/python scripts/container_smoke.py^[[0m
+verify	Run .venv/bin/python scripts/container_smoke.py	2026-10-23T02:47:36.6052555Z shell: /usr/bin/bash -e {0}
+verify	Run .venv/bin/python scripts/container_smoke.py	2026-10-23T02:47:36.6052833Z env:
+verify	Run .venv/bin/python scripts/container_smoke.py	2026-10-23T02:47:36.6053353Z   DATABASE_URL: ***127.0.0.1:5432/stepwise
+verify	Run .venv/bin/python scripts/container_smoke.py	2026-10-23T02:47:36.6053747Z   pythonLocation: /opt/hostedtoolcache/Python/3.13.16/x64
+verify	Run .venv/bin/python scripts/container_smoke.py	2026-10-23T02:47:36.6054368Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.13.16/x64/lib/pkgconfig
+verify	Run .venv/bin/python scripts/container_smoke.py	2026-10-23T02:47:36.6054938Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.16/x64
+verify	Run .venv/bin/python scripts/container_smoke.py	2026-10-23T02:47:36.6055585Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.16/x64
+verify	Run .venv/bin/python scripts/container_smoke.py	2026-10-23T02:47:36.6056150Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.16/x64
+verify	Run .venv/bin/python scripts/container_smoke.py	2026-10-23T02:47:36.6056690Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.13.16/x64/lib
+verify	Run .venv/bin/python scripts/container_smoke.py	2026-10-23T02:47:36.6057462Z   POSTGRES_CONTAINER: a65ae2a7b3786efc4d0469a361f6b78d963dc5511b136b6c887dee236664b850
+verify	Run .venv/bin/python scripts/container_smoke.py	2026-10-23T02:47:36.6058076Z ##[endgroup]
+verify	Run .venv/bin/python scripts/container_smoke.py	2026-10-23T02:47:36.7250560Z 18442e2b4cf44ffed322c369f2fd448ebb7b92a851560571ffb10d176f4f3c3f
+verify	Run .venv/bin/python scripts/container_smoke.py	2026-10-23T02:47:47.5766779Z stepwise-ci-smoke
+verify	Run .venv/bin/python scripts/container_smoke.py	2026-10-23T02:47:48.3656606Z a65ae2a7b3786efc4d0469a361f6b78d963dc5511b136b6c887dee236664b850
+verify	Run .venv/bin/python scripts/container_smoke.py	2026-10-23T02:47:48.8999039Z {"event": "ready", "url": "http://0.0.0.0:18091"}
+verify	Run .venv/bin/python scripts/container_smoke.py	2026-10-23T02:47:48.8999785Z {"event": "http", "status": 200, "operation": "read"}
+verify	Run .venv/bin/python scripts/container_smoke.py	2026-10-23T02:47:48.9000577Z {"event": "http", "status": 200, "operation": "write"}
+verify	Run .venv/bin/python scripts/container_smoke.py	2026-10-23T02:47:48.9001361Z {"event": "http", "status": 200, "operation": "read"}
+verify	Run .venv/bin/python scripts/container_smoke.py	2026-10-23T02:47:48.9002209Z {"event": "http", "status": 200, "operation": "write"}
+verify	Run .venv/bin/python scripts/container_smoke.py	2026-10-23T02:47:48.9003017Z {"event": "http", "status": 200, "operation": "write"}
+verify	Run .venv/bin/python scripts/container_smoke.py	2026-10-23T02:47:48.9003822Z {"event": "http", "status": 200, "operation": "write"}
+verify	Run .venv/bin/python scripts/container_smoke.py	2026-10-23T02:47:48.9004633Z {"event": "http", "status": 200, "operation": "write"}
+verify	Run .venv/bin/python scripts/container_smoke.py	2026-10-23T02:47:48.9005258Z {"event": "http", "status": 200, "operation": "write"}
+verify	Run .venv/bin/python scripts/container_smoke.py	2026-10-23T02:47:48.9005762Z {"event": "http", "status": 200, "operation": "write"}
+verify	Run .venv/bin/python scripts/container_smoke.py	2026-10-23T02:47:48.9006270Z {"event": "ready", "url": "http://0.0.0.0:18091"}
+verify	Run .venv/bin/python scripts/container_smoke.py	2026-10-23T02:47:48.9006764Z {"event": "http", "status": 200, "operation": "write"}
+verify	Run .venv/bin/python scripts/container_smoke.py	2026-10-23T02:47:48.9007276Z {"event": "http", "status": 200, "operation": "write"}
+verify	Run .venv/bin/python scripts/container_smoke.py	2026-10-23T02:47:48.9642048Z stepwise-ci-smoke
+verify	Run .venv/bin/python scripts/container_smoke.py	2026-10-23T02:47:48.9661392Z {"actual_container": true, "restart_replay_equal": true, "proof": {"exact": true, "frames": 5, "provider_calls": 0, "recorded_sha256": "0b280756bd47679b6b8943fc60c138c9c77d23a63d64cc513ca85cbcd6c24b87", "replay_sha256": "0b280756bd47679b6b8943fc60c138c9c77d23a63d64cc513ca85cbcd6c24b87"}}
+verify	Post Run actions/setup-node@v4	﻿2026-10-23T02:47:48.9850726Z Post job cleanup.
+verify	Post Run actions/setup-node@v4	2026-10-23T02:47:49.1110233Z (node:4512) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+verify	Post Run actions/setup-node@v4	2026-10-23T02:47:49.1111951Z (Use `node --trace-deprecation ...` to show where the warning was created)
+verify	Post Run actions/setup-python@v5	﻿2026-10-23T02:47:49.1290803Z Post job cleanup.
+verify	Post Run actions/setup-python@v5	2026-10-23T02:47:49.2580694Z (node:4520) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+verify	Post Run actions/setup-python@v5	2026-10-23T02:47:49.2582209Z (Use `node --trace-deprecation ...` to show where the warning was created)
+verify	Post Run actions/checkout@v4	﻿2026-10-23T02:47:49.2769986Z Post job cleanup.
+verify	Post Run actions/checkout@v4	2026-10-23T02:47:49.3675425Z [command]/usr/bin/git version
+verify	Post Run actions/checkout@v4	2026-10-23T02:47:49.3719830Z git version 2.55.0
+verify	Post Run actions/checkout@v4	2026-10-23T02:47:49.3759682Z Temporarily overriding HOME='/home/runner/work/_temp/f89d0ae7-8891-4cf3-87ed-df729ace43f8' before making global git config changes
+verify	Post Run actions/checkout@v4	2026-10-23T02:47:49.3761404Z Adding repository directory to the temporary git global config as a safe directory
+verify	Post Run actions/checkout@v4	2026-10-23T02:47:49.3765119Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/stepwise/stepwise
+verify	Post Run actions/checkout@v4	2026-10-23T02:47:49.3808282Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+verify	Post Run actions/checkout@v4	2026-10-23T02:47:49.3848183Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+verify	Post Run actions/checkout@v4	2026-10-23T02:47:49.4154359Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+verify	Post Run actions/checkout@v4	2026-10-23T02:47:49.4194869Z http.https://github.com/.extraheader
+verify	Post Run actions/checkout@v4	2026-10-23T02:47:49.4198961Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+verify	Post Run actions/checkout@v4	2026-10-23T02:47:49.4241987Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+verify	Post Run actions/checkout@v4	2026-10-23T02:47:49.4588287Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+verify	Post Run actions/checkout@v4	2026-10-23T02:47:49.4630927Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+verify	Stop containers	﻿2026-10-23T02:47:49.5076142Z Print service container logs: 6e8a2d006c1f4c04ad0b046b0e0170b2_postgres17bookworm_f1a567
+verify	Stop containers	2026-10-23T02:47:49.5081182Z ##[command]/usr/bin/docker logs --details a65ae2a7b3786efc4d0469a361f6b78d963dc5511b136b6c887dee236664b850
+verify	Stop containers	2026-10-23T02:47:49.5230583Z  The files belonging to this database system will be owned by user "postgres".
+verify	Stop containers	2026-10-23T02:47:49.5232901Z  initdb: warning: enabling "trust" authentication for local connections
+verify	Stop containers	2026-10-23T02:47:49.5233852Z  initdb: hint: You can change this by editing pg_hba.conf or using the option -A, or --auth-local and --auth-host, the next time you run initdb.
+verify	Stop containers	2026-10-23T02:47:49.5235469Z  2026-10-23 02:46:54.350 UTC [1] LOG:  starting PostgreSQL 17.11 (Debian 17.11-1.pgdg12+2) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14+deb12u1) 12.2.0, 64-bit
+verify	Stop containers	2026-10-23T02:47:49.5236564Z  2026-10-23 02:46:54.350 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+verify	Stop containers	2026-10-23T02:47:49.5237206Z  2026-10-23 02:46:54.350 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+verify	Stop containers	2026-10-23T02:47:49.5237899Z  2026-10-23 02:46:54.351 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+verify	Stop containers	2026-10-23T02:47:49.5238545Z  2026-10-23 02:46:54.354 UTC [64] LOG:  database system was shut down at 2026-10-23 02:46:54 UTC
+verify	Stop containers	2026-10-23T02:47:49.5239127Z  2026-10-23 02:46:54.359 UTC [1] LOG:  database system is ready to accept connections
+verify	Stop containers	2026-10-23T02:47:49.5239729Z  2026-10-23 02:47:21.090 UTC [254] LOG:  unexpected EOF on client connection with an open transaction
+verify	Stop containers	2026-10-23T02:47:49.5240512Z  2026-10-23 02:47:48.113 UTC [1] LOG:  received fast shutdown request
+verify	Stop containers	2026-10-23T02:47:49.5241220Z  2026-10-23 02:47:48.113 UTC [1] LOG:  aborting any active transactions
+verify	Stop containers	2026-10-23T02:47:49.5242453Z  2026-10-23 02:47:48.116 UTC [1] LOG:  background worker "logical replication launcher" (PID 67) exited with exit code 1
+verify	Stop containers	2026-10-23T02:47:49.5243015Z  2026-10-23 02:47:48.118 UTC [62] LOG:  shutting down
+verify	Stop containers	2026-10-23T02:47:49.5243415Z  2026-10-23 02:47:48.118 UTC [62] LOG:  checkpoint starting: shutdown immediate
+verify	Stop containers	2026-10-23T02:47:49.5244556Z  2026-10-23 02:47:48.123 UTC [62] LOG:  checkpoint complete: wrote 111 buffers (0.7%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.003 s, sync=0.001 s, total=0.005 s; sync files=59, longest=0.001 s, average=0.001 s; distance=550 kB, estimate=550 kB; lsn=0/1994568, redo lsn=0/1994568
+verify	Stop containers	2026-10-23T02:47:49.5245634Z  2026-10-23 02:47:48.129 UTC [1] LOG:  database system is shut down
+verify	Stop containers	2026-10-23T02:47:49.5246367Z  2026-10-23 02:47:48.417 UTC [1] LOG:  starting PostgreSQL 17.11 (Debian 17.11-1.pgdg12+2) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14+deb12u1) 12.2.0, 64-bit
+verify	Stop containers	2026-10-23T02:47:49.5247135Z  2026-10-23 02:47:48.417 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+verify	Stop containers	2026-10-23T02:47:49.5247623Z  2026-10-23 02:47:48.417 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+verify	Stop containers	2026-10-23T02:47:49.5248149Z  2026-10-23 02:47:48.418 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+verify	Stop containers	2026-10-23T02:47:49.5248718Z  2026-10-23 02:47:48.421 UTC [29] LOG:  database system was shut down at 2026-10-23 02:47:48 UTC
+verify	Stop containers	2026-10-23T02:47:49.5249234Z  2026-10-23 02:47:48.427 UTC [1] LOG:  database system is ready to accept connections
+verify	Stop containers	2026-10-23T02:47:49.5249676Z  This user must also own the server process.
+verify	Stop containers	2026-10-23T02:47:49.5249948Z  
+verify	Stop containers	2026-10-23T02:47:49.5250223Z  The database cluster will be initialized with locale "en_US.utf8".
+verify	Stop containers	2026-10-23T02:47:49.5251000Z  The default database encoding has accordingly been set to "UTF8".
+verify	Stop containers	2026-10-23T02:47:49.5251447Z  The default text search configuration will be set to "english".
+verify	Stop containers	2026-10-23T02:47:49.5251775Z  
+verify	Stop containers	2026-10-23T02:47:49.5251981Z  Data page checksums are disabled.
+verify	Stop containers	2026-10-23T02:47:49.5252225Z  
+verify	Stop containers	2026-10-23T02:47:49.5252519Z  fixing permissions on existing directory /var/lib/postgresql/data ... ok
+verify	Stop containers	2026-10-23T02:47:49.5252922Z  creating subdirectories ... ok
+verify	Stop containers	2026-10-23T02:47:49.5253261Z  selecting dynamic shared memory implementation ... posix
+verify	Stop containers	2026-10-23T02:47:49.5253610Z  selecting default "max_connections" ... 100
+verify	Stop containers	2026-10-23T02:47:49.5254182Z  selecting default "shared_buffers" ... 128MB
+verify	Stop containers	2026-10-23T02:47:49.5254484Z  selecting default time zone ... Etc/UTC
+verify	Stop containers	2026-10-23T02:47:49.5254766Z  creating configuration files ... ok
+verify	Stop containers	2026-10-23T02:47:49.5255041Z  running bootstrap script ... ok
+verify	Stop containers	2026-10-23T02:47:49.5255331Z  performing post-bootstrap initialization ... ok
+verify	Stop containers	2026-10-23T02:47:49.5255635Z  syncing data to disk ... ok
+verify	Stop containers	2026-10-23T02:47:49.5255858Z  
+verify	Stop containers	2026-10-23T02:47:49.5256132Z  
+verify	Stop containers	2026-10-23T02:47:49.5256735Z  Success. You can now start the database server using:
+verify	Stop containers	2026-10-23T02:47:49.5257271Z  
+verify	Stop containers	2026-10-23T02:47:49.5257666Z      pg_ctl -D /var/lib/postgresql/data -l logfile start
+verify	Stop containers	2026-10-23T02:47:49.5258186Z  
+verify	Stop containers	2026-10-23T02:47:49.5259042Z  waiting for server to start....2026-10-23 02:46:54.038 UTC [48] LOG:  starting PostgreSQL 17.11 (Debian 17.11-1.pgdg12+2) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14+deb12u1) 12.2.0, 64-bit
+verify	Stop containers	2026-10-23T02:47:49.5259988Z  2026-10-23 02:46:54.038 UTC [48] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+verify	Stop containers	2026-10-23T02:47:49.5260843Z  2026-10-23 02:46:54.041 UTC [51] LOG:  database system was shut down at 2026-10-23 02:46:53 UTC
+verify	Stop containers	2026-10-23T02:47:49.5261463Z  2026-10-23 02:46:54.046 UTC [48] LOG:  database system is ready to accept connections
+verify	Stop containers	2026-10-23T02:47:49.5261848Z   done
+verify	Stop containers	2026-10-23T02:47:49.5262035Z  server started
+verify	Stop containers	2026-10-23T02:47:49.5262228Z  CREATE DATABASE
+verify	Stop containers	2026-10-23T02:47:49.5262419Z  
+verify	Stop containers	2026-10-23T02:47:49.5262580Z  
+verify	Stop containers	2026-10-23T02:47:49.5262925Z  /usr/local/bin/docker-entrypoint.sh: ignoring /docker-entrypoint-initdb.d/*
+verify	Stop containers	2026-10-23T02:47:49.5263323Z  
+verify	Stop containers	2026-10-23T02:47:49.5263869Z  waiting for server to shut down...2026-10-23 02:46:54.227 UTC [48] LOG:  received fast shutdown request
+verify	Stop containers	2026-10-23T02:47:49.5264412Z  .2026-10-23 02:46:54.228 UTC [48] LOG:  aborting any active transactions
+verify	Stop containers	2026-10-23T02:47:49.5265005Z  2026-10-23 02:46:54.230 UTC [48] LOG:  background worker "logical replication launcher" (PID 54) exited with exit code 1
+verify	Stop containers	2026-10-23T02:47:49.5265547Z  2026-10-23 02:46:54.230 UTC [49] LOG:  shutting down
+verify	Stop containers	2026-10-23T02:47:49.5265938Z  2026-10-23 02:46:54.231 UTC [49] LOG:  checkpoint starting: shutdown immediate
+verify	Stop containers	2026-10-23T02:47:49.5267036Z  2026-10-23 02:46:54.247 UTC [49] LOG:  checkpoint complete: wrote 921 buffers (5.6%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.013 s, sync=0.003 s, total=0.017 s; sync files=301, longest=0.001 s, average=0.001 s; distance=4238 kB, estimate=4238 kB; lsn=0/190A9C8, redo lsn=0/190A9C8
+verify	Stop containers	2026-10-23T02:47:49.5268128Z  2026-10-23 02:46:54.254 UTC [48] LOG:  database system is shut down
+verify	Stop containers	2026-10-23T02:47:49.5268466Z   done
+verify	Stop containers	2026-10-23T02:47:49.5268646Z  server stopped
+verify	Stop containers	2026-10-23T02:47:49.5268838Z  
+verify	Stop containers	2026-10-23T02:47:49.5269070Z  PostgreSQL init process complete; ready for start up.
+verify	Stop containers	2026-10-23T02:47:49.5269377Z  
+verify	Stop containers	2026-10-23T02:47:49.5269539Z  
+verify	Stop containers	2026-10-23T02:47:49.5269866Z  PostgreSQL Database directory appears to contain a database; Skipping initialization
+verify	Stop containers	2026-10-23T02:47:49.5270289Z  
+verify	Stop containers	2026-10-23T02:47:49.5275852Z Stop and remove container: 6e8a2d006c1f4c04ad0b046b0e0170b2_postgres17bookworm_f1a567
+verify	Stop containers	2026-10-23T02:47:49.5281227Z ##[command]/usr/bin/docker rm --force a65ae2a7b3786efc4d0469a361f6b78d963dc5511b136b6c887dee236664b850
+verify	Stop containers	2026-10-23T02:47:49.6628066Z a65ae2a7b3786efc4d0469a361f6b78d963dc5511b136b6c887dee236664b850
+verify	Stop containers	2026-10-23T02:47:49.6659289Z Remove container network: github_network_c91e128308e74dea98c81f0bec65932d
+verify	Stop containers	2026-10-23T02:47:49.6664624Z ##[command]/usr/bin/docker network rm github_network_c91e128308e74dea98c81f0bec65932d
+verify	Stop containers	2026-10-23T02:47:49.7423031Z github_network_c91e128308e74dea98c81f0bec65932d
+verify	Complete job	﻿2026-10-23T02:47:49.7507591Z Cleaning up orphan processes
+verify	Complete job	2026-10-23T02:47:49.8009729Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/setup-node@v4, actions/setup-python@v5. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
