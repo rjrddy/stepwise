@@ -1,0 +1,71 @@
+verify	Initialize containers	﻿2026-10-23T02:45:22.4152438Z ##[group]Checking docker version
+verify	Initialize containers	2026-10-23T02:45:22.4164663Z ##[command]/usr/bin/docker version --format '{{.Server.APIVersion}}'
+verify	Initialize containers	2026-10-23T02:45:22.5412280Z '1.54'
+verify	Initialize containers	2026-10-23T02:45:22.5420864Z Docker daemon API version: '1.54'
+verify	Initialize containers	2026-10-23T02:45:22.5422083Z ##[command]/usr/bin/docker version --format '{{.Client.APIVersion}}'
+verify	Initialize containers	2026-10-23T02:45:22.5604766Z '1.54'
+verify	Initialize containers	2026-10-23T02:45:22.5616637Z Docker client API version: '1.54'
+verify	Initialize containers	2026-10-23T02:45:22.5622914Z ##[endgroup]
+verify	Initialize containers	2026-10-23T02:45:22.5625583Z ##[group]Clean up resources from previous jobs
+verify	Initialize containers	2026-10-23T02:45:22.5631002Z ##[command]/usr/bin/docker ps --all --quiet --no-trunc --filter "label=ff1d62"
+verify	Initialize containers	2026-10-23T02:45:22.5791457Z ##[command]/usr/bin/docker network prune --force --filter "label=ff1d62"
+verify	Initialize containers	2026-10-23T02:45:22.5938041Z ##[endgroup]
+verify	Initialize containers	2026-10-23T02:45:22.5938913Z ##[group]Create local container network
+verify	Initialize containers	2026-10-23T02:45:22.5949540Z ##[command]/usr/bin/docker network create --label ff1d62 github_network_807cb8ae5c3b438aa299e8426da17427
+verify	Initialize containers	2026-10-23T02:45:22.7111576Z d1eb281f69e6714144b4efd1c68278ca1c4cc61741261f8d63d10ce183786515
+verify	Initialize containers	2026-10-23T02:45:22.7131500Z ##[endgroup]
+verify	Initialize containers	2026-10-23T02:45:22.7168629Z ##[group]Starting postgres service container
+verify	Initialize containers	2026-10-23T02:45:22.7197987Z ##[command]/usr/bin/docker pull postgres:17-bookworm
+verify	Initialize containers	2026-10-23T02:45:23.5135074Z 17-bookworm: Pulling from library/postgres
+verify	Initialize containers	2026-10-23T02:45:23.7835825Z 3d633189a257: Pulling fs layer
+verify	Initialize containers	2026-10-23T02:45:23.7837423Z ebb1e532806b: Pulling fs layer
+verify	Initialize containers	2026-10-23T02:45:23.7839321Z 34c01ab7a545: Pulling fs layer
+verify	Initialize containers	2026-10-23T02:45:23.7841088Z c5f39862cce6: Pulling fs layer
+verify	Initialize containers	2026-10-23T02:45:23.7842487Z a03cba1ee28f: Pulling fs layer
+verify	Initialize containers	2026-10-23T02:45:23.7843595Z abc91d04c190: Pulling fs layer
+verify	Initialize containers	2026-10-23T02:45:23.7844634Z 11422d7ca1a4: Pulling fs layer
+verify	Initialize containers	2026-10-23T02:45:23.7845868Z b69f574b66a3: Pulling fs layer
+verify	Initialize containers	2026-10-23T02:45:23.7847393Z 66361375bc70: Pulling fs layer
+verify	Initialize containers	2026-10-23T02:45:23.7848864Z 1dc57ea82d8b: Pulling fs layer
+verify	Initialize containers	2026-10-23T02:45:23.7850914Z eb2a6aab6a8e: Pulling fs layer
+verify	Initialize containers	2026-10-23T02:45:23.7852548Z 2433825d376d: Pulling fs layer
+verify	Initialize containers	2026-10-23T02:45:23.7854124Z 80015fd97697: Pulling fs layer
+verify	Initialize containers	2026-10-23T02:45:23.7855365Z 32ac211a4068: Pulling fs layer
+verify	Initialize containers	2026-10-23T02:45:24.0454095Z 66361375bc70: Download complete
+verify	Initialize containers	2026-10-23T02:45:24.0462684Z 34c01ab7a545: Download complete
+verify	Initialize containers	2026-10-23T02:45:24.0464665Z a03cba1ee28f: Download complete
+verify	Initialize containers	2026-10-23T02:45:24.0467876Z 3d633189a257: Download complete
+verify	Initialize containers	2026-10-23T02:45:24.0470740Z b69f574b66a3: Download complete
+verify	Initialize containers	2026-10-23T02:45:24.0473368Z ebb1e532806b: Download complete
+verify	Initialize containers	2026-10-23T02:45:24.0479929Z abc91d04c190: Download complete
+verify	Initialize containers	2026-10-23T02:45:24.1399673Z 80015fd97697: Download complete
+verify	Initialize containers	2026-10-23T02:45:24.1414975Z eb2a6aab6a8e: Download complete
+verify	Initialize containers	2026-10-23T02:45:24.1417036Z 2433825d376d: Download complete
+verify	Initialize containers	2026-10-23T02:45:24.1420712Z 1dc57ea82d8b: Download complete
+verify	Initialize containers	2026-10-23T02:45:24.1425276Z 32ac211a4068: Download complete
+verify	Initialize containers	2026-10-23T02:45:24.4390518Z 9ebd972eb67f: Download complete
+verify	Initialize containers	2026-10-23T02:45:24.4400546Z 11422d7ca1a4: Download complete
+verify	Initialize containers	2026-10-23T02:45:24.4404851Z f7351f0ca88e: Download complete
+verify	Initialize containers	2026-10-23T02:45:25.3538986Z 11422d7ca1a4: Pull complete
+verify	Initialize containers	2026-10-23T02:45:25.4386765Z c5f39862cce6: Download complete
+verify	Initialize containers	2026-10-23T02:45:25.4454372Z a03cba1ee28f: Pull complete
+verify	Initialize containers	2026-10-23T02:45:25.4559141Z 32ac211a4068: Pull complete
+verify	Initialize containers	2026-10-23T02:45:25.5482286Z 80015fd97697: Pull complete
+verify	Initialize containers	2026-10-23T02:45:25.6407757Z 3d633189a257: Pull complete
+verify	Initialize containers	2026-10-23T02:45:25.6455451Z abc91d04c190: Pull complete
+verify	Initialize containers	2026-10-23T02:45:25.7421274Z b69f574b66a3: Pull complete
+verify	Initialize containers	2026-10-23T02:45:25.7451911Z ebb1e532806b: Pull complete
+verify	Initialize containers	2026-10-23T02:45:27.3454674Z c5f39862cce6: Pull complete
+verify	Initialize containers	2026-10-23T02:45:27.5009617Z 1dc57ea82d8b: Pull complete
+verify	Initialize containers	2026-10-23T02:45:27.5406848Z 66361375bc70: Pull complete
+verify	Initialize containers	2026-10-23T02:45:27.5418415Z 34c01ab7a545: Pull complete
+verify	Initialize containers	2026-10-23T02:45:27.5430552Z eb2a6aab6a8e: Pull complete
+verify	Initialize containers	2026-10-23T02:45:27.5440366Z 2433825d376d: Pull complete
+verify	Initialize containers	2026-10-23T02:45:27.5599979Z Digest: sha256:858bb5e98eed02eb8cafbcdc007f9a65d1b613972028944a8ec2133ccaf80d27
+verify	Initialize containers	2026-10-23T02:45:27.5601900Z Status: Downloaded newer image for postgres:17-bookworm
+verify	Initialize containers	2026-10-23T02:45:27.5609627Z docker.io/library/postgres:17-bookworm
+verify	Initialize containers	2026-10-23T02:45:27.5700500Z ##[command]/usr/bin/docker create --name 4a70095df03d4c289039e7776afdf8b0_postgres17bookworm_67973c --label ff1d62 --network github_network_807cb8ae5c3b438aa299e8426da17427 --network-alias postgres -p 5432:5432 --health-cmd 'pg_isready -U postgres -d stepwise' --health-interval 2s --health-timeout 3s --health-retries 30 -e "POSTGRES_PASSWORD=synthetic-ci-password" -e "POSTGRES_DB=stepwise" -e GITHUB_ACTIONS=true -e CI=true postgres:17-bookworm
+verify	Initialize containers	2026-10-23T02:45:27.5883838Z unknown shorthand flag: 'U' in -U
+verify	Initialize containers	2026-10-23T02:45:27.5886211Z Usage:  docker create [OPTIONS] IMAGE [COMMAND] [ARG...]
+verify	Initialize containers	2026-10-23T02:45:27.5886919Z Run 'docker create --help' for more information
+verify	Initialize containers	2026-10-23T02:45:27.6042907Z ##[error]Exit code 125 returned from process: file name '/usr/bin/docker', arguments 'create --name 4a70095df03d4c289039e7776afdf8b0_postgres17bookworm_67973c --label ff1d62 --network github_network_807cb8ae5c3b438aa299e8426da17427 --network-alias postgres -p 5432:5432 --health-cmd 'pg_isready -U postgres -d stepwise' --health-interval 2s --health-timeout 3s --health-retries 30 -e "POSTGRES_PASSWORD=synthetic-ci-password" -e "POSTGRES_DB=stepwise" -e GITHUB_ACTIONS=true -e CI=true postgres:17-bookworm'.

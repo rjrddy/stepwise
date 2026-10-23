@@ -13,7 +13,7 @@ jobs:
           POSTGRES_DB: stepwise
         ports: ['5432:5432']
         options: >-
-          --health-cmd 'pg_isready -U postgres -d stepwise'
+          --health-cmd "pg_isready -U postgres -d stepwise"
           --health-interval 2s --health-timeout 3s --health-retries 30
     env:
       DATABASE_URL: postgresql://postgres:synthetic-ci-password@127.0.0.1:5432/stepwise
