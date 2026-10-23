@@ -1,0 +1,204 @@
+{
+  "original": {
+    "id": "768a6de9-ac63-425b-8b7c-607de5175cb1",
+    "label": "Seeded conversion failure",
+    "created_at": "2026-10-22 21:38:54.372475-05:00",
+    "mode": "demo",
+    "status": "done",
+    "parent": null,
+    "breakpoint": 2,
+    "revision": 6,
+    "events": [
+      {
+        "kind": "model",
+        "name": "plan",
+        "error": null,
+        "input": {
+          "task": "Quote a synthetic instrument in USD",
+          "budget_usd": 50
+        },
+        "output": {
+          "action": "lookup",
+          "phrasing": "find"
+        }
+      },
+      {
+        "kind": "tool",
+        "name": "catalog.lookup",
+        "error": null,
+        "input": {
+          "previous": {
+            "action": "lookup",
+            "phrasing": "find"
+          }
+        },
+        "output": {
+          "sku": "SYNTH-OSC",
+          "currency": "USD",
+          "price_cents": 4200
+        }
+      },
+      {
+        "kind": "tool",
+        "name": "quote.convert",
+        "error": null,
+        "input": {
+          "previous": {
+            "sku": "SYNTH-OSC",
+            "currency": "USD",
+            "price_cents": 4200
+          }
+        },
+        "output": {
+          "divisor": 1,
+          "amount_usd": 4200
+        }
+      },
+      {
+        "kind": "model",
+        "name": "decision",
+        "error": null,
+        "input": {
+          "previous": {
+            "divisor": 1,
+            "amount_usd": 4200
+          }
+        },
+        "output": {
+          "reason": "over budget",
+          "approved": false,
+          "amount_usd": 4200
+        }
+      },
+      {
+        "kind": "model",
+        "name": "answer",
+        "error": null,
+        "input": {
+          "previous": {
+            "reason": "over budget",
+            "approved": false,
+            "amount_usd": 4200
+          }
+        },
+        "output": {
+          "message": "Reject",
+          "decision": {
+            "reason": "over budget",
+            "approved": false,
+            "amount_usd": 4200
+          }
+        }
+      }
+    ]
+  },
+  "repaired": {
+    "id": "9e9855db-fdcc-4d87-bb90-4b722304c5c3",
+    "label": "Edited \u00b7 Seeded conversion failure",
+    "created_at": "2026-10-22 21:38:54.404159-05:00",
+    "mode": "demo",
+    "status": "done",
+    "parent": "768a6de9-ac63-425b-8b7c-607de5175cb1",
+    "breakpoint": null,
+    "revision": 5,
+    "events": [
+      {
+        "kind": "model",
+        "name": "plan",
+        "error": null,
+        "input": {
+          "task": "Quote a synthetic instrument in USD",
+          "budget_usd": 50
+        },
+        "output": {
+          "action": "lookup",
+          "phrasing": "find"
+        }
+      },
+      {
+        "kind": "tool",
+        "name": "catalog.lookup",
+        "error": null,
+        "input": {
+          "previous": {
+            "action": "lookup",
+            "phrasing": "find"
+          }
+        },
+        "output": {
+          "sku": "SYNTH-OSC",
+          "currency": "USD",
+          "price_cents": 4200
+        }
+      },
+      {
+        "kind": "tool",
+        "name": "quote.convert",
+        "error": null,
+        "input": {
+          "previous": {
+            "sku": "SYNTH-OSC",
+            "currency": "USD",
+            "price_cents": 4200
+          }
+        },
+        "output": {
+          "divisor": 100,
+          "amount_usd": 42
+        }
+      },
+      {
+        "kind": "model",
+        "name": "decision",
+        "error": null,
+        "input": {
+          "previous": {
+            "divisor": 100,
+            "amount_usd": 42
+          }
+        },
+        "output": {
+          "reason": "within budget",
+          "approved": true,
+          "amount_usd": 42
+        }
+      },
+      {
+        "kind": "model",
+        "name": "answer",
+        "error": null,
+        "input": {
+          "previous": {
+            "reason": "within budget",
+            "approved": true,
+            "amount_usd": 42
+          }
+        },
+        "output": {
+          "message": "Approve",
+          "decision": {
+            "reason": "within budget",
+            "approved": true,
+            "amount_usd": 42
+          }
+        }
+      }
+    ]
+  },
+  "proofs": [
+    {
+      "exact": true,
+      "frames": 5,
+      "recorded_sha256": "0b280756bd47679b6b8943fc60c138c9c77d23a63d64cc513ca85cbcd6c24b87",
+      "replay_sha256": "0b280756bd47679b6b8943fc60c138c9c77d23a63d64cc513ca85cbcd6c24b87",
+      "provider_calls": 0
+    },
+    {
+      "exact": true,
+      "frames": 5,
+      "recorded_sha256": "0be69529d77567688362b89d0e0b1e62739c6142514972f4f394a235bbbb2ac5",
+      "replay_sha256": "0be69529d77567688362b89d0e0b1e62739c6142514972f4f394a235bbbb2ac5",
+      "provider_calls": 0
+    }
+  ]
+}

@@ -17,7 +17,7 @@ from stepwise.core import canonical
 from stepwise.store import Conflict, Store, configured
 from stepwise.workflow import advance, diff, fork, replay
 
-WEB = Path(__file__).resolve().parents[2] / "apps/web/dist"
+WEB = Path(os.getenv("STEPWISE_WEB", str(Path(__file__).resolve().parents[2] / "apps/web/dist")))
 
 
 class Server(ThreadingHTTPServer):

@@ -8,9 +8,9 @@ FROM python:3.13-slim-bookworm
 WORKDIR /app
 COPY pyproject.toml ./
 COPY src ./src
-RUN pip install --no-cache-dir . && useradd --uid 10001 --create-home app
+RUN pip install --no-cache-dir pip==26.2.2 . && useradd --uid 10001 --create-home app
 COPY --from=web /web/dist ./apps/web/dist
 USER 10001
-ENV HOST=0.0.0.0 PORT=8091
+ENV HOST=0.0.0.0 PORT=8091 STEPWISE_WEB=/app/apps/web/dist
 EXPOSE 8091
 CMD ["python", "-m", "stepwise.server"]

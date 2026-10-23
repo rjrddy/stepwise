@@ -55,6 +55,14 @@ def main() -> None:
                 time.sleep(0.5)
         else:
             raise AssertionError("container not ready")
+        with urllib.request.urlopen(base) as response:
+            html = response.read().decode()
+        assert "Stepwise" in html and "/assets/" in html
+        import re
+
+        asset = re.search(r'src="([^"]+\.js)"', html).group(1)
+        with urllib.request.urlopen(base + asset) as response:
+            assert response.status == 200 and len(response.read()) > 0
         rid = request("/api/runs", {"label": "container restart", "mode": "demo"})["id"]
         run = request("/api/runs/" + rid)
         while run["status"] != "done":
