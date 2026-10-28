@@ -2,7 +2,7 @@
   "project": "stepwise",
   "motion_profile": "Film sprocket advance",
   "source_sha256": {
-    "apps/web/src/motion.ts": "782c5d0551735dc06843fa352fdda22f652d909f4c6756654c01c44c3cf43978",
+    "apps/web/src/motion.ts": "4013e558d9a2438c0cdf1317ec7b627efcd9e7590315706611ae9ed3a67a074f",
     "apps/web/src/style.css": "a28a125fba36d55ee55bf3ed11427ae9c0514413c1a05fc87c54ce0fa29c6ad9"
   },
   "frontend_build_lint": "passed",

@@ -10,10 +10,10 @@
   "keyboard_focus": true,
   "lifecycles": [
     {
-      "run": "6c99bbae-fead-4c74-a6b9-a7a3d97aa323",
+      "run": "d2109e94-34fe-482b-95d5-df094c31d451",
       "frames": 5,
-      "elapsed_s": 0.8418415419291705
+      "elapsed_s": 0.9288761250209063
     }
   ],
-  "duration_s": 1.20902216702234
+  "duration_s": 1.3109417910454795
 }
