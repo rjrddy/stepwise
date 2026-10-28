@@ -1,0 +1,19 @@
+{
+  "responsive_widths": [
+    390,
+    768,
+    1024,
+    1440
+  ],
+  "page_errors": [],
+  "network_failure_recovery": true,
+  "keyboard_focus": true,
+  "lifecycles": [
+    {
+      "run": "6c99bbae-fead-4c74-a6b9-a7a3d97aa323",
+      "frames": 5,
+      "elapsed_s": 0.8418415419291705
+    }
+  ],
+  "duration_s": 1.20902216702234
+}

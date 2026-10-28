@@ -1,0 +1,106 @@
+{
+  "project": "stepwise",
+  "scope": "Synthetic DOM using actual shipped motion module",
+  "noEntranceAnimation": true,
+  "unchangedNodeReplacementIgnored": true,
+  "observedAnimations": [
+    {
+      "tag": "BUTTON",
+      "cls": "",
+      "id": "contract-key",
+      "frames": [
+        {
+          "transform": "translateY(0)"
+        },
+        {
+          "transform": "translateY(1px)",
+          "offset": 0.2
+        },
+        {
+          "transform": "translateY(0)"
+        }
+      ],
+      "options": {
+        "duration": 160,
+        "easing": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "iterations": 1,
+        "fill": "none"
+      },
+      "at": 108.10000002384186
+    },
+    {
+      "tag": "PRE",
+      "cls": "",
+      "id": "",
+      "frames": [
+        {
+          "transform": "translateX(6px)"
+        },
+        {
+          "transform": "translateX(-1.2px)",
+          "offset": 0.65
+        },
+        {
+          "transform": "translateX(0)"
+        }
+      ],
+      "options": {
+        "duration": 200,
+        "easing": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "iterations": 1,
+        "fill": "none"
+      },
+      "at": 150.60000002384186
+    },
+    {
+      "tag": "B",
+      "cls": "",
+      "id": "",
+      "frames": [
+        {
+          "transform": "translateX(-5px)"
+        },
+        {
+          "transform": "translateX(0)"
+        }
+      ],
+      "options": {
+        "duration": 180,
+        "easing": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "iterations": 1,
+        "fill": "none"
+      },
+      "at": 150.80000007152557
+    },
+    {
+      "tag": "BUTTON",
+      "cls": "current",
+      "id": "",
+      "frames": [
+        {
+          "transform": "scaleX(0.96)"
+        },
+        {
+          "transform": "scaleX(1)"
+        }
+      ],
+      "options": {
+        "duration": 170,
+        "easing": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "iterations": 1,
+        "fill": "none"
+      },
+      "at": 150.80000007152557
+    }
+  ],
+  "transformOpacityOnly": true,
+  "zeroDelay": true,
+  "immediatePointerAndKeyboard": true,
+  "edgeClickTargetStableUntilActivation": true,
+  "disabledAndEditorExcluded": true,
+  "liveReducedMotionCancellation": true,
+  "reEnable": true,
+  "pagehideCleanup": true,
+  "pageErrors": [],
+  "initialReducedMotion": true
+}

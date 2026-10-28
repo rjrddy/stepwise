@@ -1,0 +1,17 @@
+{
+  "project": "stepwise",
+  "motion_profile": "Film sprocket advance",
+  "source_sha256": {
+    "apps/web/src/motion.ts": "782c5d0551735dc06843fa352fdda22f652d909f4c6756654c01c44c3cf43978",
+    "apps/web/src/style.css": "a28a125fba36d55ee55bf3ed11427ae9c0514413c1a05fc87c54ce0fa29c6ad9"
+  },
+  "frontend_build_lint": "passed",
+  "motion_contract": "passed",
+  "built_page_smoke": "passed",
+  "live_backend_browser": "passed",
+  "showcase_contract": "not applicable",
+  "compositor_properties_only": true,
+  "live_reduced_motion_cancellation": true,
+  "fps": "not measured",
+  "new_dependencies": 0
+}

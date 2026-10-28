@@ -37,6 +37,9 @@ Alternatively `docker compose up --build`; use the documented synthetic local co
 
 ## Decisions and limits
 
+Contextual motion uses finite transform-only responses to real controls and changed evidence, with live reduced-motion cancellation. See [motion design and validation](docs/MOTION.md); frame rate is not measured.
+
+
 **Partial for the broader spec:** durable breakpoints, edited tool outputs and continuation are implemented for an explicit synthetic workflow. Generic Python/Node application traces support call capture, inspection, diff and application-driven replay; arbitrary application pause/edit/resume is unfinished. Human diagnosis-time improvement, actual model-provider integrations, streaming, multitenant authorization and hosted operation are not measured or implemented. Nothing is deployed.
 
 The model boundary is a nondeterministic scripted synthetic function, not LLM inference. Replay equality means canonical **redacted call payloads** (including failures), excluding timing and run metadata. A configured secret cannot be reconstructed. The demo replay reruns its continuation logic; an uploaded SDK trace must be replayed inside its calling application to verify that application's behavior. The API cannot execute arbitrary uploaded code.
